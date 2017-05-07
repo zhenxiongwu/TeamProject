@@ -11,22 +11,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
+import constant.Lab;
 
-public class StatisticsPageHolder {
 
-	private static StatisticsPageHolder statisticsPageHolder;
-
-	public static StatisticsPageHolder getInstance(Composite parent) {
-		if (statisticsPageHolder == null) {
-			statisticsPageHolder = new StatisticsPageHolder(parent);
-			statisticsPageHolder.parent = parent;
-		}
-		return statisticsPageHolder;
-	}
-
-	private Composite parent;
-
-	private Composite composite;
+public class StatisticsPageHolder extends PageHolder{
 
 	private TabFolder tabFolder;
 
@@ -43,16 +31,16 @@ public class StatisticsPageHolder {
 	private Combo combo_reportTheme_tendency;
 	private Group group_tendency;
 
-	private StatisticsPageHolder(Composite parent) {
-		createComposite(parent);
-	}
+	
 
-	private void createComposite(Composite parent) {
+	@Override
+	protected void createContent(Composite parent) {
 
-		composite = new Composite(parent, SWT.NONE);
-		composite.setLayout(new FillLayout());
+		this.parent = parent;
+		page = new Composite(parent, SWT.NONE);
+		page.setLayout(new FillLayout());
 
-		tabFolder = new TabFolder(composite, SWT.NONE);
+		tabFolder = new TabFolder(page, SWT.NONE);
 
 		{
 			tabItem_cases = new TabItem(tabFolder, SWT.NONE);
@@ -73,12 +61,13 @@ public class StatisticsPageHolder {
 			}
 			
 			{
-				combo_reportTheme_cases = new Combo(composite_cases,SWT.NONE);
+				combo_reportTheme_cases = new Combo(composite_cases,SWT.READ_ONLY);
 				GridData gridData = new GridData();
 				gridData.verticalSpan=3;
 				gridData.horizontalSpan=3;
 				gridData.verticalAlignment= GridData.CENTER;
 				combo_reportTheme_cases.setLayoutData(gridData);
+				combo_reportTheme_cases.setItems(Lab.reportTheme_statistics);
 			}
 			
 			{
@@ -117,11 +106,12 @@ public class StatisticsPageHolder {
 			}
 			
 			{
-				combo_reportTheme_tendency = new Combo(composite_tendency,SWT.NONE);
+				combo_reportTheme_tendency = new Combo(composite_tendency,SWT.READ_ONLY);
 				GridData gridData = new GridData();
 				gridData.verticalSpan=3;
 				gridData.verticalAlignment= GridData.CENTER;
 				combo_reportTheme_tendency.setLayoutData(gridData);
+				combo_reportTheme_tendency.setItems(Lab.reportTheme_statistics);
 			}
 			
 			{
@@ -134,8 +124,16 @@ public class StatisticsPageHolder {
 		}
 	}
 
-	public Composite getComposite() {
-		return composite;
+	@Override
+	public void refresh() {
+		// TODO 自动生成的方法存根
+		
+	}
+
+	@Override
+	public void destory() {
+		// TODO 自动生成的方法存根
+		
 	}
 
 }

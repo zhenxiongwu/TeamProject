@@ -1,9 +1,14 @@
-package utils;
+package gui.utils;
 
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * 
+ * @author zhenxiongwu
+ *
+ */
 public class SWTUtils {
 
 	private SWTUtils(){}
