@@ -55,7 +55,7 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 			paperStype_combo = new Combo(page, SWT.READ_ONLY);
 			horizontal_align(paperStype_combo, GridData.HORIZONTAL_ALIGN_FILL);
-			paperStype_combo.setItems(Lab.paperType);
+			paperStype_combo.setItems(Lab.newspaperType);
 			paperStype_combo.select(0);
 
 			newsStype_label = new Label(page, SWT.NONE);

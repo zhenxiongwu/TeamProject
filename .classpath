@@ -6,20 +6,6 @@
 			<accessrule kind="accessible" pattern="**"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.osgi_3.11.2.v20161107-1947.jar" sourcepath="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.osgi_3.11.2.v20161107-1947.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.core.commands_3.8.0.v20160316-1921.jar" sourcepath="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.core.commands_3.8.0.v20160316-1921.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.equinox.common_3.8.0.v20160509-1230.jar" sourcepath="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.equinox.common_3.8.0.v20160509-1230.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.equinox.registry_3.6.100.v20160223-2218.jar" sourcepath="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.equinox.registry_3.6.100.v20160223-2218.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.core.runtime_3.12.0.v20160606-1342.jar" sourcepath="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.core.runtime_3.12.0.v20160606-1342.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.text_3.6.0.v20160503-1849.jar" sourcepath="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.text_3.6.0.v20160503-1849.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.jface_3.12.1.v20160923-1528.jar" sourcepath="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.jface_3.12.1.v20160923-1528.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.jface.text_3.11.2.v20161113-1700.jar" sourcepath="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.jface.text_3.11.2.v20161113-1700.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.ui.workbench_3.108.2.v20161025-2029.jar" sourcepath="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.ui.workbench_3.108.2.v20161025-2029.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/com.ibm.icu_56.1.0.v201601250100.jar" sourcepath="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/com.ibm.icu_56.1.0.v201601250100.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.ui.forms_3.7.0.v20160518-1929.jar" sourcepath="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.eclipse.ui.forms_3.7.0.v20160518-1929.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.slf4j.api_1.7.2.v20121108-1250.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.slf4j.impl.log4j12_1.7.2.v20131105-2200.jar"/>
-	<classpathentry kind="lib" path="D:/zhenxiongwu/develop/eclipse/installPath/eclipse/plugins/org.apache.log4j_1.2.15.v201012070815.jar"/>
 	<classpathentry kind="lib" path="lib/swt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

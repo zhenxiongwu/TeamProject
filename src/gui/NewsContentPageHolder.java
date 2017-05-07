@@ -82,7 +82,7 @@ public class NewsContentPageHolder extends PageHolder {
 		{
 			combo_paperType = new Combo(page, SWT.NONE);
 			combo_paperType.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
-			combo_paperType.setItems(Lab.paperType);
+			combo_paperType.setItems(Lab.newspaperType);
 		}
 
 		{
