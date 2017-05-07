@@ -5,15 +5,19 @@ import java.util.logging.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import constant.Lab;
+import controller.TagController;
+import data.NewsData;
 
 public class NewsContentPageHolder extends PageHolder {
 	
@@ -41,6 +45,9 @@ public class NewsContentPageHolder extends PageHolder {
 
 	private Button button_back;
 	
+	private NewsData object;
+	
+	
 	private final int GRIDLAYOUT_COLUMN = 6;
 	
 	@Override
@@ -52,7 +59,7 @@ public class NewsContentPageHolder extends PageHolder {
 		{
 			label_newsTitle = new Label(page, SWT.NONE);
 			GridData gridData = new GridData();
-			gridData.horizontalSpan = 1;
+			gridData.horizontalSpan = 4;
 			label_newsTitle.setLayoutData(gridData);
 			label_newsTitle.setText("新闻标题：");
 		}
@@ -60,7 +67,7 @@ public class NewsContentPageHolder extends PageHolder {
 		{
 			label_newsDate = new Label(page, SWT.NONE);
 			GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_CENTER);
-			gridData.horizontalSpan = 5;
+			gridData.horizontalSpan = 2;
 			label_newsDate.setLayoutData(gridData);
 			label_newsDate.setText("日期：");
 		}
@@ -118,11 +125,11 @@ public class NewsContentPageHolder extends PageHolder {
 		}
 
 		{
-			text_newsContent = new Text(page, SWT.BORDER | SWT.V_SCROLL | SWT.READ_ONLY);
+			text_newsContent = new Text(page, SWT.BORDER | SWT.V_SCROLL | SWT.READ_ONLY | SWT.WRAP);
+			text_newsContent.setFont(new Font(Display.getDefault(),"宋体",12,SWT.NONE));
 			GridData gridData = new GridData(GridData.FILL_BOTH);
 			gridData.horizontalSpan = GRIDLAYOUT_COLUMN;
 			text_newsContent.setLayoutData(gridData);
-			text_newsContent.setText("新闻内容。");
 		}
 
 		{
@@ -137,6 +144,8 @@ public class NewsContentPageHolder extends PageHolder {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					if(onBackButtonListener != null){
+						String newsPaperType = Lab.newspaperType[combo_paperType.getSelectionIndex()];
+						TagController.addTagIts(object,Lab.NEWSPAPERTYPE,newsPaperType);
 						onBackButtonListener.onBackButtonClick();
 					}
 				}
@@ -158,13 +167,17 @@ public class NewsContentPageHolder extends PageHolder {
 	}
 	
 
-	public void display(Object object) {
-		Logger logger = Logger.getLogger("zhenxiongwu");
-		logger.info((String) object);
-		label_newsTitle.setText("新闻标题： " + (String) object);
+	public void display(NewsData object) {
 		
-		//TODO: Add the logic of displaying the infomation of the object
+		this.object = object;
+		
+		label_newsTitle.setText("新闻标题： " + object.getTitle());
+		
+		String paperType = object.getTagItsMap().get(Lab.NEWSPAPERTYPE);
+		combo_paperType.select(Lab.getIndexOfPaperType(paperType));
+		//TODO set combo
 
+		text_newsContent.setText(object.getEncodedContent());
 		page.layout();
 	}
 	

@@ -19,7 +19,10 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
 import constant.Lab;
+import controller.DeleteController;
+import data.NewsData;
 import gui.NewsListBuilder.NewsListListener;
+import main.Launcher;
 
 public class NewsSearchPageHolder extends PageHolder implements NewsListListener{
 	
@@ -94,17 +97,8 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 		{
 			GridData gridData = new GridData(GridData.FILL_BOTH);
 			gridData.horizontalSpan = COLUMN;
-			java.util.List<Object> objects = new ArrayList();
-			objects.add("关注留守儿童");
-			objects.add("光明日报");
-			objects.add("sakldfjl");
-			objects.add("asjdkfjlk");
-			objects.add("关注留守儿童");
-			objects.add("光明日报");
-			objects.add("sakldfjl");
-			objects.add("asjdkfjlk");
 
-			NewsListBuilder newsListBuilder = new NewsListBuilder(page,objects);
+			NewsListBuilder newsListBuilder = new NewsListBuilder(page,Launcher.testList.getNewsDataList());
 			newsListBuilder.setNewsListListener(this);
 			newsListComposite = newsListBuilder.getNewsListComposite();
 			newsListComposite.setLayoutData(gridData);
@@ -129,7 +123,7 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 	
 	public static interface OnClickNewsListener{
-		public void onClickNews(Control control, Object object,int position);
+		public void onClickNews(Control control, NewsData object,int position);
 	}
 	
 	private OnClickNewsListener onClickNewsListener;
@@ -139,13 +133,13 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 	}
 
 	@Override
-	public void onItemClickDown(int mouse_button, Control control, Object object, int position) {
+	public void onItemClickDown(int mouse_button, Control control, NewsData object, int position) {
 		// TODO 自动生成的方法存根
 		
 	}
 
 	@Override
-	public void onItemClickUp(int mouse_button, Control control, Object object, int position) {
+	public void onItemClickUp(int mouse_button, Control control, NewsData object, int position) {
 		if(mouse_button == 3){
 			Menu menu = new Menu(control);
 			MenuItem menuItemDownload = new MenuItem(menu,SWT.PUSH);
@@ -164,7 +158,9 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 				
 				@Override
 				public void handleEvent(Event arg0) {
-					// TODO 自动生成的方法存根
+					DeleteController.addRecycleNews(object);
+					
+					//TODO 从testList中移除object
 					
 				}
 			});
@@ -174,7 +170,7 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 	}
 
 	@Override
-	public void onItemDoubleClick(int mouse_button, Control control, Object object, int position) {
+	public void onItemDoubleClick(int mouse_button, Control control, NewsData object, int position) {
 		if(onClickNewsListener != null){
 			onClickNewsListener.onClickNews(control,object,position);
 		}

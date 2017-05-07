@@ -15,21 +15,29 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+
+import data.NewsData;
 
 public class NewsListBuilder {
 
 	public interface NewsListListener {
-		public void onItemClickDown(int mouse_button, Control control, Object object, int position);
+		public void onItemClickDown(int mouse_button, Control control, NewsData object, int position);
 
-		public void onItemClickUp(int mouse_button, Control control, Object object, int position);
+		public void onItemClickUp(int mouse_button, Control control, NewsData object, int position);
 
-		public void onItemDoubleClick(int mouse_button, Control control, Object object, int position);
+		public void onItemDoubleClick(int mouse_button, Control control, NewsData object, int position);
 	}
 
 	private Composite newsListComposite;
 	private NewsListListener newsListListener = null;
+	
+	private Composite parent;
+	private List<NewsData> objects;
 
-	public NewsListBuilder(Composite parent, List<Object> objects) {
+	public NewsListBuilder(Composite parent, List<NewsData> objects) {
+		this.parent = parent;
+		this.objects = objects;
 		createNewsList(parent, objects);
 	}
 
@@ -41,7 +49,7 @@ public class NewsListBuilder {
 		return newsListComposite;
 	}
 
-	private void createNewsList(Composite parent, List<Object> objects) {
+	private void createNewsList(Composite parent, List<NewsData> objects) {
 		newsListComposite = new Composite(parent, SWT.NONE);
 		newsListComposite.setLayout(new FillLayout());
 		ScrolledComposite scrolledComposite = new ScrolledComposite(newsListComposite, SWT.BORDER | SWT.V_SCROLL);
@@ -51,13 +59,10 @@ public class NewsListBuilder {
 		composite.setLayout(new GridLayout());
 
 		int position = 0;
-		for (Object object : objects) {
-			Logger logger = Logger.getLogger("zhenxiongwu");
-			logger.info("befor create group");
+		for (NewsData object : objects) {
 			GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 			addNews(composite, gridData, object, position);
 			position++;
-			logger.info("after create group");
 		}
 
 		scrolledComposite.setContent(composite);
@@ -68,37 +73,41 @@ public class NewsListBuilder {
 
 	}
 
-	private Group addNews(Composite parent, GridData gridData, Object object, int position) {
+	private Group addNews(Composite parent, GridData gridData, NewsData object, int position) {
 		Group news = new Group(parent, SWT.NONE);
 		news.setLayoutData(gridData);
-		news.setText((String) object);
-//		news.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_INFO_BACKGROUND));
-		news.addMouseListener(new MouseListener() {
-			Logger logger = Logger.getLogger("zhenxiongwu");
+		news.setLayout(new FillLayout());
+		news.setText(object.getDate());
+		
+		Label text_title = new Label(news,SWT.NONE);
+		
+		text_title.setText("\n\t"+object.getTitle()+"\n\n");
+		
+		text_title.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseUp(MouseEvent arg0) {
 				if (newsListListener != null)
-					newsListListener.onItemClickUp(arg0.button, news, object, position);
+					newsListListener.onItemClickUp(arg0.button, text_title, object, position);
 			}
 
 			@Override
 			public void mouseDown(MouseEvent arg0) {
 				if (newsListListener != null)
-					newsListListener.onItemClickDown(arg0.button, news, object, position);
+					newsListListener.onItemClickDown(arg0.button, text_title, object, position);
 
 			}
 
 			@Override
 			public void mouseDoubleClick(MouseEvent arg0) {
 				if (newsListListener != null)
-					newsListListener.onItemDoubleClick(arg0.button, news, object, position);
+					newsListListener.onItemDoubleClick(arg0.button, text_title, object, position);
 			}
 			
 
 		});
 		
-		news.addMouseTrackListener(new MouseTrackListener() {
+		text_title.addMouseTrackListener(new MouseTrackListener() {
 			
 			@Override
 			public void mouseHover(MouseEvent arg0) {
@@ -110,17 +119,26 @@ public class NewsListBuilder {
 			public void mouseExit(MouseEvent arg0) {
 //				news.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_INFO_BACKGROUND));
 
-				news.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+				text_title.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 			}
 			
 			@Override
 			public void mouseEnter(MouseEvent arg0) {
 //				news.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_LIST_SELECTION));
 
-				news.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_INFO_BACKGROUND));
+				text_title.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_INFO_BACKGROUND));
 				
 			}
 		});
 		return news;
+	}
+	
+	public Composite refresh(){
+		Logger logger = Logger.getLogger("zhenxiognwu");
+		logger.info("objects size: "+objects.size());
+		newsListComposite.dispose();
+		createNewsList(parent,objects);
+		newsListComposite.layout();
+		return newsListComposite;
 	}
 }

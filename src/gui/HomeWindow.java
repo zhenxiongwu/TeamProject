@@ -98,6 +98,7 @@ public class HomeWindow extends Window {
 					stackLayout.topControl = statisticsPage;
 					break;
 				case 2:
+					recyclePageHolder.refresh();
 					stackLayout.topControl = recyclePage;
 					break;
 				default:

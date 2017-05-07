@@ -7,7 +7,7 @@ import data.NewsDataList;
 import main.Launcher;
 public class TagController {
 	
-	//报纸类型n
+	/*//报纸类型n
 	private String newspaperType;
 	
 	private String newsType;
@@ -129,7 +129,8 @@ public class TagController {
 		return Launcher.testList.getIndexNewsData(position);
 	}
 
-	public void addTagIts(NewsData newsData){
+	public static void addTagIts(NewsData newsData,String key, String value){
+		
 		Map<String, String> temp = new HashMap<String, String>();
 		temp.put("报纸类别",newspaperType);
 		temp.put("新闻类型",newsType);
@@ -142,5 +143,9 @@ public class TagController {
 		temp.put("表彰奖励的新闻主体",raiseNewsSubject);
 		temp.put("有关民工子女不能留在城市读书的原因", reason);
 		newsData.setTagItsMap(temp);
+	}*/
+	public static void addTagIts(NewsData newsData,String key, String value){
+		newsData.getTagItsMap().put(key,value);
 	}
+	
 }

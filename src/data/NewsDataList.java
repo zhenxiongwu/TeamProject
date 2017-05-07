@@ -9,8 +9,8 @@ public class NewsDataList {
 		NewsDataParser newsDataParse = new NewsDataParser();
 		newsDataList = new ArrayList<NewsData>();
 		newsDataParse.setNewsDataList(newsDataList, "guangming.xml");
-		newsDataParse.setNewsDataList(newsDataList, "nanfangdaily.xml");
-		newsDataParse.setNewsDataList(newsDataList, "sichuan.xml");
+		//newsDataParse.setNewsDataList(newsDataList, "nanfangdaily.xml");
+		//newsDataParse.setNewsDataList(newsDataList, "sichuan.xml");
 	}
 	
 	public List<NewsData> getNewsDataList(){
@@ -21,6 +21,10 @@ public class NewsDataList {
 		return newsDataList.get(index);
 	}
 	
+	public int getSize(){
+		return newsDataList.size();
+	}
+/*	
 	public static void main(String[] args){
 		NewsDataList testList = new NewsDataList();
 		testList.setNewsDataList();
@@ -28,5 +32,5 @@ public class NewsDataList {
 		for(int i=0;i<testNewsDataList.size();i++){
 			System.out.println(testNewsDataList.get(i).getTagIts());
 		}
-	}
+	}*/
 }

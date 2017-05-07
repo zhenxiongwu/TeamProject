@@ -1,4 +1,5 @@
 package data;
+import java.util.HashMap;
 import java.util.Map;
 
 public class NewsData {
@@ -16,7 +17,7 @@ public class NewsData {
 	private String TrueUrl;
 	private String Tags;
 	private String EncodedContent; 
-	private Map<String,String> TagItsMap;
+	private Map<String,String> TagItsMap = new HashMap<String, String>();
 	
 	public void setTagItsMap(Map<String,String> tagItsMap){
 		TagItsMap = tagItsMap;

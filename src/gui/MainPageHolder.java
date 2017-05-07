@@ -5,6 +5,7 @@ import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
+import data.NewsData;
 import gui.NewsContentPageHolder.OnBackButtonListener;
 import gui.NewsSearchPageHolder.OnClickNewsListener;
 
@@ -50,7 +51,7 @@ implements OnClickNewsListener,OnBackButtonListener {
 	}
 
 	@Override
-	public void onClickNews(Control control, Object object, int position) {
+	public void onClickNews(Control control, NewsData object, int position) {
 		stacklayout.topControl = newsContentPage;
 		newsContentPageHolder.display(object);
 		page.layout();

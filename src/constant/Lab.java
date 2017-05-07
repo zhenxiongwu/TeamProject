@@ -2,12 +2,29 @@ package constant;
 
 public class Lab {
 	
+	public static String NEWSPAPERTYPE = "1";
+	
 	public static String[] newspaperType = new String[]{
 			"",
 			"中央一级党报",
 			"省一级党报",
 			"经营模式市场化的报纸"
 	};
+	
+	public static int getIndexOfPaperType(String lab){
+		if(lab == null)
+			return 0;
+		if(lab.equals("中央一级党报")){
+			return 1;
+		}
+		else if(lab.equals("省一级党报")){
+			return 2;
+		}
+		else if(lab.equals("经营模式市场化的报纸")){
+			return 3;
+		}
+		return 0;
+	}
 
 	public static String[] newsType = new String[]{
 			"",
@@ -16,6 +33,7 @@ public class Lab {
 			"评论",
 			"其他"
 	};
+	
 	
 	public static String[] reportTheme = new String[]{
 			"",
