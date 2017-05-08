@@ -13,7 +13,7 @@ public class NewsDataList {
 		//newsDataParse.setNewsDataList(newsDataList, "sichuan.xml");
 	}
 	
-	public List<NewsData> getNewsDataList(){
+	public static List<NewsData> getNewsDataList(){
 		return newsDataList;
 	}
 	
