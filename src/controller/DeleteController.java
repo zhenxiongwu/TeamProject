@@ -1,24 +1,57 @@
 package controller;
 
 import data.NewsData;
+import data.NewsDataList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DeleteController {
-	
+
+	private static List<DataChangeListener> dataChangeListeners = new ArrayList<DataChangeListener>();
 	public static List<NewsData> recycleNewsList = new ArrayList<NewsData>();
-	
-	public static void addRecycleNews(NewsData news){
-		recycleNewsList.add(news);
-	}
-	
-	public static void recoverRecycleNews(NewsData news){
-		recycleNewsList.remove(news);
+
+	public static interface DataChangeListener {
+		public void recycleNewsChange();
 	}
 
-	public static List<NewsData> getRecycleNewsList(){
+	public static void addDataChangeListener(DataChangeListener dataChangeListener) {
+		dataChangeListeners.add(dataChangeListener);
+	}
+
+	private static void notifysAll() {
+		for (DataChangeListener dataChangeListener : dataChangeListeners) {
+			dataChangeListener.recycleNewsChange();
+		}
+	}
+
+	public static void addRecycleNews(NewsData news) {
+		news.setIsDeleted("true");
+		recycleNewsList.add(news);
+
+		dataChange();
+	}
+
+	public static void recoverRecycleNews(NewsData news) {
+		news.setIsDeleted("false");
+		recycleNewsList.remove(news);
+		dataChange();
+	}
+
+	public static List<NewsData> getRecycleNewsList() {
 		return recycleNewsList;
 	}
 
+	public static void initRecycleList(){
+		for(NewsData newsData: NewsDataList.newsDataList){
+			if(newsData.getIsDeleted()){
+				recycleNewsList.add(newsData);
+			}
+		}
+	}
+	
+	private static void dataChange(){
+		notifysAll();
+		SearchController.refreshSearchNewsList();
+	}
 }

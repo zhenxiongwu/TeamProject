@@ -1,6 +1,6 @@
 package gui;
 
-import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -12,7 +12,6 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
@@ -20,11 +19,12 @@ import org.eclipse.swt.widgets.MenuItem;
 
 import constant.Lab;
 import controller.DeleteController;
+import controller.SearchController;
 import data.NewsData;
 import gui.NewsListBuilder.NewsListListener;
-import main.Launcher;
 
-public class NewsSearchPageHolder extends PageHolder implements NewsListListener{
+public class NewsSearchPageHolder extends PageHolder
+implements NewsListListener,SearchController.DataChangeListener{
 	
 	
 	private final int COLUMN = 7;
@@ -42,7 +42,7 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 	
 	private Composite newsListComposite;
 	
-	
+	private NewsListBuilder newsListBuilder;
 	
 	@Override
 	protected void createContent(Composite parent) {
@@ -98,7 +98,7 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 			GridData gridData = new GridData(GridData.FILL_BOTH);
 			gridData.horizontalSpan = COLUMN;
 
-			NewsListBuilder newsListBuilder = new NewsListBuilder(page,Launcher.testList.getNewsDataList());
+			newsListBuilder = new NewsListBuilder(page,SearchController.getSearchNewsList());
 			newsListBuilder.setNewsListListener(this);
 			newsListComposite = newsListBuilder.getNewsListComposite();
 			newsListComposite.setLayoutData(gridData);
@@ -111,8 +111,8 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 	@Override
 	public void refresh() {
-		// TODO 自动生成的方法存根
-
+		newsListBuilder.refresh();
+//		page.layout();
 	}
 
 	@Override
@@ -140,6 +140,8 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 	@Override
 	public void onItemClickUp(int mouse_button, Control control, NewsData object, int position) {
+
+		
 		if(mouse_button == 3){
 			Menu menu = new Menu(control);
 			MenuItem menuItemDownload = new MenuItem(menu,SWT.PUSH);
@@ -149,7 +151,7 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 				@Override
 				public void handleEvent(Event arg0) {
 					// TODO 自动生成的方法存根
-					
+					menu.dispose();
 				}
 			});
 			MenuItem menuItemDelete = new MenuItem(menu,SWT.PUSH);
@@ -159,9 +161,8 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 				@Override
 				public void handleEvent(Event arg0) {
 					DeleteController.addRecycleNews(object);
-					
-					//TODO 从testList中移除object
-					
+
+					menu.dispose();
 				}
 			});
 			control.setMenu(menu);
@@ -171,10 +172,15 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 	@Override
 	public void onItemDoubleClick(int mouse_button, Control control, NewsData object, int position) {
-		if(onClickNewsListener != null){
+		if(onClickNewsListener != null && mouse_button == 1){
 			onClickNewsListener.onClickNews(control,object,position);
 		}
 		
+	}
+
+	@Override
+	public void searchNewsChange() {
+		refresh();
 	}
 
 }

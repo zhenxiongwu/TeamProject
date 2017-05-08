@@ -57,18 +57,19 @@ public class NewsContentPageHolder extends PageHolder {
 		page.setLayout(gridLayout);
 
 		{
-			label_newsTitle = new Label(page, SWT.NONE);
-			GridData gridData = new GridData();
-			gridData.horizontalSpan = 4;
+			label_newsTitle = new Label(page, SWT.WRAP);
+			GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+			gridData.horizontalSpan = GRIDLAYOUT_COLUMN;
 			label_newsTitle.setLayoutData(gridData);
 			label_newsTitle.setText("新闻标题：");
+			label_newsTitle.setFont(new Font(Display.getDefault(),"宋体",14,SWT.NONE));
 		}
 
 		{
 			label_newsDate = new Label(page, SWT.NONE);
-			GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_CENTER);
-			gridData.horizontalSpan = 2;
-			label_newsDate.setLayoutData(gridData);
+//			GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_CENTER);
+//			gridData.horizontalSpan = GRIDLAYOUT_COLUMN;
+//			label_newsDate.setLayoutData(gridData);
 			label_newsDate.setText("日期：");
 		}
 
@@ -172,12 +173,16 @@ public class NewsContentPageHolder extends PageHolder {
 		this.object = object;
 		
 		label_newsTitle.setText("新闻标题： " + object.getTitle());
+		label_newsDate.setText("日期："+ object.getDate());
 		
 		String paperType = object.getTagItsMap().get(Lab.NEWSPAPERTYPE);
 		combo_paperType.select(Lab.getIndexOfPaperType(paperType));
 		//TODO set combo
 
-		text_newsContent.setText(object.getEncodedContent());
+		String newsContent = object.getEncodedContent();
+		String text = newsContent.replaceAll("\n","\n\n\t");
+		text_newsContent.setText("\n\t"+text);
+		text_newsContent.setTabs(4);
 		page.layout();
 	}
 	

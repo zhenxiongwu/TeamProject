@@ -1,6 +1,7 @@
 package gui;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -15,7 +16,8 @@ import controller.DeleteController;
 import data.NewsData;
 import gui.NewsListBuilder.NewsListListener;
 
-public class RecyclePageHolder extends PageHolder implements NewsListListener{
+public class RecyclePageHolder extends PageHolder 
+implements NewsListListener,DeleteController.DataChangeListener{
 
 	NewsListBuilder newsListBuilder;
 	
@@ -33,9 +35,9 @@ public class RecyclePageHolder extends PageHolder implements NewsListListener{
 
 	@Override
 	public void refresh() {
+		
 		newsListBuilder.refresh();
 		page.layout();
-		
 	}
 
 	@Override
@@ -79,6 +81,11 @@ public class RecyclePageHolder extends PageHolder implements NewsListListener{
 	public void onItemDoubleClick(int mouse_button, Control control, NewsData object, int position) {
 		// TODO 自动生成的方法存根
 		
+	}
+
+	@Override
+	public void recycleNewsChange() {
+		refresh();
 	}
 
 }

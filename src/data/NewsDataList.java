@@ -2,15 +2,19 @@ package data;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.DeleteController;
+
 public class NewsDataList {
-	public static List<NewsData> newsDataList;
 	
-	public void setNewsDataList(){
+	public static List<NewsData> newsDataList = new ArrayList<NewsData>();
+	
+	public static void initNewsDataList(){
 		NewsDataParser newsDataParse = new NewsDataParser();
-		newsDataList = new ArrayList<NewsData>();
 		newsDataParse.setNewsDataList(newsDataList, "guangming.xml");
 		//newsDataParse.setNewsDataList(newsDataList, "nanfangdaily.xml");
 		//newsDataParse.setNewsDataList(newsDataList, "sichuan.xml");
+		DeleteController.initRecycleList();
+		
 	}
 	
 	public List<NewsData> getNewsDataList(){
@@ -24,13 +28,4 @@ public class NewsDataList {
 	public int getSize(){
 		return newsDataList.size();
 	}
-/*	
-	public static void main(String[] args){
-		NewsDataList testList = new NewsDataList();
-		testList.setNewsDataList();
-		List<NewsData> testNewsDataList = testList.getNewsDataList();
-		for(int i=0;i<testNewsDataList.size();i++){
-			System.out.println(testNewsDataList.get(i).getTagIts());
-		}
-	}*/
 }

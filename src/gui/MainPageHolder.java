@@ -5,6 +5,7 @@ import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
+import controller.SearchController;
 import data.NewsData;
 import gui.NewsContentPageHolder.OnBackButtonListener;
 import gui.NewsSearchPageHolder.OnClickNewsListener;
@@ -28,6 +29,7 @@ implements OnClickNewsListener,OnBackButtonListener {
 
 		newsSearchPageHolder = new NewsSearchPageHolder();
 		newsSearchPageHolder.setOnClickNewsListener(this);
+		SearchController.addDataChangeListener(newsSearchPageHolder);
 		newsSearchPage = newsSearchPageHolder.getPage(page);
 
 		newsContentPageHolder = new NewsContentPageHolder();

@@ -1,6 +1,5 @@
 package gui;
 
-import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
@@ -15,6 +14,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 
+import controller.DeleteController;
 import gui.utils.SWTUtils;
 
 public class HomeWindow extends Window {
@@ -98,7 +98,6 @@ public class HomeWindow extends Window {
 					stackLayout.topControl = statisticsPage;
 					break;
 				case 2:
-					recyclePageHolder.refresh();
 					stackLayout.topControl = recyclePage;
 					break;
 				default:
@@ -124,6 +123,7 @@ public class HomeWindow extends Window {
 
 		{
 			recyclePageHolder = new RecyclePageHolder();
+			DeleteController.addDataChangeListener(recyclePageHolder);
 			recyclePage = recyclePageHolder.getPage(rightComposite);
 		}
 
