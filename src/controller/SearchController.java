@@ -1,9 +1,12 @@
-package controller;
+﻿package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.logging.Logger;
 
+
+import constant.Lab;
 import data.NewsData;
 import data.NewsDataList;
 
@@ -43,4 +46,5 @@ public class SearchController {
 		initSearchNewsList();
 		notifysAll();
 	}
+
 }

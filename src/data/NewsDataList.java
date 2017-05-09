@@ -17,7 +17,7 @@ public class NewsDataList {
 		
 	}
 	
-	public List<NewsData> getNewsDataList(){
+	public static List<NewsData> getNewsDataList(){
 		return newsDataList;
 	}
 	
