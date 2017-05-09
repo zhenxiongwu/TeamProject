@@ -5,6 +5,7 @@ import data.NewsDataList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class DeleteController {
 
@@ -27,6 +28,8 @@ public class DeleteController {
 
 	public static void addRecycleNews(NewsData news) {
 		news.setIsDeleted("true");
+		Logger logger = Logger.getLogger("zhenxiongwu");
+		logger.info(news.getTitle());
 		recycleNewsList.add(news);
 
 		dataChange();

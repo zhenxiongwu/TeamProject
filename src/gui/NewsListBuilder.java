@@ -227,16 +227,22 @@ public class NewsListBuilder {
 			@Override
 			public void mouseUp(MouseEvent arg0) {
 				if (newsListListener != null){
+					Logger logger = Logger.getLogger("zhenxiongwu");
 					NewsData newsData = getNewsData(position);
 					newsListListener.onItemClickUp(arg0.button, label_title, newsData, position);
+				
+					group.layout();
+					logger.info(newsData.getTitle());
 				}
 			}
 
 			@Override
 			public void mouseDown(MouseEvent arg0) {
+				
 				if (newsListListener != null){
 					NewsData newsData = getNewsData(position);
 					newsListListener.onItemClickDown(arg0.button, label_title, newsData, position);
+					group.layout();
 				}
 					
 			}

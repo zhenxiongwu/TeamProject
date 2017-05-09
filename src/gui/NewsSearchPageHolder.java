@@ -132,6 +132,7 @@ implements NewsListListener,SearchController.DataChangeListener{
 		this.onClickNewsListener = onClickNewsListener;
 	}
 
+	
 	@Override
 	public void onItemClickDown(int mouse_button, Control control, NewsData object, int position) {
 		// TODO 自动生成的方法存根
@@ -141,10 +142,11 @@ implements NewsListListener,SearchController.DataChangeListener{
 	@Override
 	public void onItemClickUp(int mouse_button, Control control, NewsData object, int position) {
 
+		Logger logger = Logger.getLogger("zhenxiongwu");
 		
 		if(mouse_button == 3){
 			Menu menu = new Menu(control);
-			MenuItem menuItemDownload = new MenuItem(menu,SWT.PUSH);
+			MenuItem menuItemDownload = new MenuItem(menu,SWT.POP_UP);
 			menuItemDownload.setText("下载(Download)　　");
 			menuItemDownload.addListener(SWT.Selection,new Listener() {
 				
@@ -154,20 +156,20 @@ implements NewsListListener,SearchController.DataChangeListener{
 					menu.dispose();
 				}
 			});
-			MenuItem menuItemDelete = new MenuItem(menu,SWT.PUSH);
+			MenuItem menuItemDelete = new MenuItem(menu,SWT.POP_UP);
 			menuItemDelete.setText("删除(Delete)");
 			menuItemDelete.addListener(SWT.Selection,new Listener() {
 				
 				@Override
 				public void handleEvent(Event arg0) {
+					
 					DeleteController.addRecycleNews(object);
-
+					logger.info(object.getTitle());
 					menu.dispose();
 				}
 			});
 			control.setMenu(menu);
 		}
-		
 	}
 
 	@Override
