@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+//下载外部新闻
 public class Download {
 	public static String trueContent(NewsData news){
 		try{

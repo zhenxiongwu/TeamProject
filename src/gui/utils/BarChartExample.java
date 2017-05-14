@@ -9,6 +9,7 @@ import org.swtchart.Chart;
 import org.swtchart.IBarSeries;
 import org.swtchart.ISeries.SeriesType;
 
+//柱状图实例
 public class BarChartExample {
 
     private static final double[] ySeries = { 0.2, 1.1, 1.9, 2.3, 1.8, 1.5,

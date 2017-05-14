@@ -10,6 +10,7 @@ import org.swtchart.Chart;
 import org.swtchart.ILineSeries;
 import org.swtchart.ISeries.SeriesType;
 
+//折线图实例
 /**
  * An example for line chart.
  */
