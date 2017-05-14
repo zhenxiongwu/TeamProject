@@ -1,11 +1,12 @@
 package controller;
 
-import data.NewsData;
-import data.NewsDataList;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+import controller.SearchController;
+import data.NewsData;
+import data.NewsDataList;
 
 public class DeleteController {
 
