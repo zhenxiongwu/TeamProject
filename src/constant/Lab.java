@@ -3,6 +3,8 @@ package constant;
 public class Lab {
 	
 	public static String NEWSPAPERTYPE = "1";
+	public static String NEWSTYPE = "2";
+	public static String REPORTTHEME = "3";
 	
 	public static String[] newspaperType = new String[]{
 			"",
@@ -34,17 +36,23 @@ public class Lab {
 			"其他"
 	};
 	
+	public static int getIndexOfNewsType(String lab){
+		if(lab == null)
+			return 0;
+		if(lab.equals("中央一级党报")){
+			return 1;
+		}
+		else if(lab.equals("省一级党报")){
+			return 2;
+		}
+		else if(lab.equals("经营模式市场化的报纸")){
+			return 3;
+		}
+		return 0;
+	}
+	
 	
 	public static String[] reportTheme = new String[]{
-			"",
-			"社会关爱",
-			"留守儿童遭受暴力",
-			"留守儿童犯罪",
-			"留守儿童意外死亡",
-			"留守儿童积极向上"
-	};
-	
-	public static String[] newsTopic = new String[]{
 			"",
 			"社会各界帮助关爱",
 			"社会各界对留守儿童现象提出的建议和看法",
@@ -57,6 +65,7 @@ public class Lab {
 			"打工父母在城市艰难的生活",
 			"其他"
 	};
+	
 	
 	public static String[] newsSource = new String[]{
 			"",

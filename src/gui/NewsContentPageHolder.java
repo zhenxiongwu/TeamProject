@@ -4,6 +4,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.internal.Library;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -40,6 +41,8 @@ public class NewsContentPageHolder extends PageHolder {
 	private Combo combo_reportTheme;
 
 	private Text text_newsContent;
+	
+//	private Button button_
 
 	private Button button_back;
 	
@@ -145,7 +148,15 @@ public class NewsContentPageHolder extends PageHolder {
 					if(onBackButtonListener != null){
 						String newsPaperType = Lab.newspaperType[combo_paperType.getSelectionIndex()];
 						TagController.addTagIts(object,Lab.NEWSPAPERTYPE,newsPaperType);
+						
+						String newsType = Lab.newsType[combo_newsType.getSelectionIndex()];
+						TagController.addTagIts(object,Lab.NEWSTYPE,newsType);
+						
+						String reportTheme = Lab.reportTheme[combo_reportTheme.getSelectionIndex()];
+						TagController.addTagIts(object,Lab.REPORTTHEME,reportTheme);
+
 						onBackButtonListener.onBackButtonClick();
+						
 					}
 				}
 
@@ -175,6 +186,10 @@ public class NewsContentPageHolder extends PageHolder {
 		
 		String paperType = object.getTagItsMap().get(Lab.NEWSPAPERTYPE);
 		combo_paperType.select(Lab.getIndexOfPaperType(paperType));
+		
+	
+		String newsType = object.getTagItsMap().get(Lab.NEWSTYPE);
+		combo_newsType.select(Lab.getIndexOfPaperType(newsType));
 		//TODO set combo
 
 		String newsContent = object.getEncodedContent();
