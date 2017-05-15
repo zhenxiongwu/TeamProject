@@ -92,10 +92,11 @@ public class HomeWindow extends Window {
 				int index = selectList.getSelectionIndex();
 				switch (index) {
 				case 0:
-					mainPageHolder.refresh();
+//					mainPageHolder.refresh();
 					stackLayout.topControl = mainPage;
 					break;
 				case 1:
+					statisticsPageHolder.refresh();
 					stackLayout.topControl = statisticsPage;
 					break;
 				case 2:

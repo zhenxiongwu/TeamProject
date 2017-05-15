@@ -11,7 +11,7 @@ import org.swtchart.Chart;
 import org.swtchart.IBarSeries;
 import org.swtchart.ISeries.SeriesType;
 
-
+import constant.Lab;
 import data.NewsDataList;
 
 //柱状图实例
@@ -63,7 +63,7 @@ public class BarChart {
         // create bar series
         chart.getAxisSet().getXAxis(0).enableCategory(true);
         chart.getAxisSet().getXAxis(0).setCategorySeries(
-                new String[] { "变量4第四类", "变量4第五类","变量4第七类" });
+                new String[] {Lab.reportTheme[4], Lab.reportTheme[5],Lab.reportTheme[7] });
         
         
         IBarSeries barSeries1 = (IBarSeries) chart.getSeriesSet().createSeries(

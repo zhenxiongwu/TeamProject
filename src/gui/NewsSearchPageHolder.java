@@ -16,14 +16,18 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 
 import com.sun.glass.ui.delegate.MenuDelegate;
 import com.sun.glass.ui.delegate.MenuItemDelegate;
+import com.sun.org.apache.bcel.internal.generic.I2F;
 import com.sun.swing.internal.plaf.metal.resources.metal;
 
 import constant.Lab;
 import controller.DeleteController;
 import controller.SearchController;
+import data.Download;
 import data.NewsData;
 import gui.NewsListBuilder.NewsListListener;
 
@@ -31,22 +35,19 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 	private final int COLUMN = 9;
 
-	private Label paperStype_label;
-	private Combo paperStype_combo;
+	private Label paperType_label;
+	private Combo paperType_combo;
 
-	private Label newsStype_label;
-	private Combo newsStype_combo;
+	private Label newsType_label;
+	private Combo newsType_combo;
 
-	private Label reportStype_label;
-	private Combo reportStype_combo;
+	private Label reportType_label;
+	private Combo reportType_combo;
 	
 
 	private Label showType_label;
 	private Combo showType_combo;
 	
-
-	private Label sex_label;
-	private Combo sex_combo;
 
 	private Button search_button;
 
@@ -63,45 +64,45 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 		{
 			{
-				paperStype_label = new Label(page, SWT.NONE);
-				horizontal_align(paperStype_label, GridData.HORIZONTAL_ALIGN_CENTER);
-				paperStype_label.setText("\t报纸类型:");
+				paperType_label = new Label(page, SWT.NONE);
+				horizontal_align(paperType_label, GridData.HORIZONTAL_ALIGN_CENTER);
+				paperType_label.setText("\t报纸类型:");
 			}
 
 			{
-				paperStype_combo = new Combo(page, SWT.READ_ONLY);
-				horizontal_align(paperStype_combo, GridData.HORIZONTAL_ALIGN_FILL);
-				paperStype_combo.setItems(Lab.newspaperType);
-				paperStype_combo.select(0);
+				paperType_combo = new Combo(page, SWT.READ_ONLY);
+				horizontal_align(paperType_combo, GridData.HORIZONTAL_ALIGN_FILL);
+				paperType_combo.setItems(Lab.newspaperType);
+				paperType_combo.select(0);
 			}
 
 			{
-				newsStype_label = new Label(page, SWT.NONE);
+				newsType_label = new Label(page, SWT.NONE);
 				// horizontal_align_fill(newsStype_label);
-				horizontal_align(newsStype_label, GridData.HORIZONTAL_ALIGN_CENTER);
-				newsStype_label.setText("\t新闻类型:");
+				horizontal_align(newsType_label, GridData.HORIZONTAL_ALIGN_CENTER);
+				newsType_label.setText("\t新闻类型:");
 			}
 
 			{
-				newsStype_combo = new Combo(page, SWT.READ_ONLY);
-				horizontal_align(newsStype_combo, GridData.HORIZONTAL_ALIGN_FILL);
-				newsStype_combo.setItems(Lab.newsType);
+				newsType_combo = new Combo(page, SWT.READ_ONLY);
+				horizontal_align(newsType_combo, GridData.HORIZONTAL_ALIGN_FILL);
+				newsType_combo.setItems(Lab.newsType);
 			}
 
 			{
-				reportStype_label = new Label(page, SWT.NONE);
+				reportType_label = new Label(page, SWT.NONE);
 				// horizontal_align_fill(newsStype_label);
-				horizontal_align(reportStype_label, GridData.HORIZONTAL_ALIGN_CENTER);
-				reportStype_label.setText("\t报道主题:");
+				horizontal_align(reportType_label, GridData.HORIZONTAL_ALIGN_CENTER);
+				reportType_label.setText("\t报道主题:");
 			}
 			
 
 			{
 //				gridData.horizontalSpan = COLUMN - 1;
-				reportStype_combo = new Combo(page, SWT.READ_ONLY);
-				reportStype_combo.setLayoutData(new GridData());
+				reportType_combo = new Combo(page, SWT.READ_ONLY);
+				reportType_combo.setLayoutData(new GridData());
 //				horizontal_align(reportStype_combo, gridData);
-				reportStype_combo.setItems(Lab.reportTheme);
+				reportType_combo.setItems(Lab.reportTheme);
 			}
 
 			{
@@ -124,8 +125,17 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 					@Override
 					public void widgetSelected(SelectionEvent arg0) {
-						// TODO 自动生成的方法存根
-						super.widgetSelected(arg0);
+						int paperIndex = paperType_combo.getSelectionIndex();
+						int newsTypeIndex = newsType_combo.getSelectionIndex();
+						int reportThemeIndex = reportType_combo.getSelectionIndex();
+						int showTypeIndex = showType_combo.getSelectionIndex();
+						paperIndex = paperIndex<0?0:paperIndex;
+						newsTypeIndex = newsTypeIndex<0?0:newsTypeIndex;
+						reportThemeIndex = reportThemeIndex<0?0:reportThemeIndex;
+						showTypeIndex = showTypeIndex<0?0:showTypeIndex;
+						SearchController.setSearchTag(
+								paperIndex,newsTypeIndex,reportThemeIndex,showTypeIndex);
+						SearchController.refreshSearchNewsList();
 					}
 
 				});
@@ -183,7 +193,13 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 		@Override
 		public void handleEvent(Event arg0) {
-			// TODO download
+			MessageBox messageBox = new MessageBox(newsListComposite.getShell());
+			if(Download.trueContent(object)){
+				messageBox.setMessage("下载成功!");
+			}
+			else
+				messageBox.setMessage("下载失败！！！ 新闻已下载");
+			messageBox.open();
 
 		}
 	};

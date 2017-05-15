@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import constant.Lab;
 import controller.DeleteController;
@@ -58,6 +59,7 @@ public class NewsDataList {
 
 		for(NewsData newsData: NewsDataList.newsDataList){
 			String goal = judgeTag(newsData);
+			
 			if(goal == "")
 				continue;
 			double count = (int) resultMap.get(goal);
@@ -71,27 +73,28 @@ public class NewsDataList {
 		Map<String, String> temp = newsData.getTagItsMap();
 		String result = "";
 		if(temp.get(Lab.REPORTTHEME)!=null){
-			result += "var4Type4";
+			if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[4])){
+				result += "var4Type4";
+			}
+			
+			else if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[5])){
+				result += "var4Type5";
+			}
+			else if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[7])){
+				result += "var4Type7";
+			}
 		}
-		else if(temp.get(Lab.REPORTTHEME)!=null){
-			result += "var4Type5";
-		}
-		else if(temp.get(Lab.REPORTTHEME)!=null){
-			result += "var4Type7";
-		}
-
 		
 		String gender = newsData.getGender();
 		if(gender.equals("")){
 			result = "";
 		}
-		else if(gender == Lab.sex[0]){
+		else if(gender == Lab.sex[1]){
 			result += "Sex0";
 		}			
 		else{
 			result += "Sex1";
 		}
-		
 		return result;
 	}
 

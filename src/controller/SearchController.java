@@ -3,6 +3,9 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
+
+import org.eclipse.swt.internal.win32.TCHITTESTINFO;
 
 import constant.Lab;
 import data.NewsData;
@@ -26,37 +29,71 @@ public class SearchController {
 		}
 	}
 
-
 	public static List<NewsData> getSearchNewsList() {
 		return searchNewsList;
 	}
 
-	public static void initSearchNewsList(){
+	public static void initSearchNewsList() {
 		searchNewsList.clear();
-		for(NewsData newsData: NewsDataList.newsDataList){
-			if(!newsData.getIsDeleted()){
+		for (NewsData newsData : NewsDataList.newsDataList) {
+			if (!newsData.getIsDeleted()) {
 				searchNewsList.add(newsData);
 			}
 		}
 	}
 	
-	public static void searchByTag(int newspaperTypeIndex,int newsTypeIndex,int reportThemeIndex){		
+	private static int newspaperTypeIndex = 0;
+	private static int newsTypeIndex = 0;
+	private static int reportThemeIndex = 0;
+	private static int showTypeIndex =0;
+	
+	public static void setSearchTag(int newspaperTypeIndex, int newsTypeIndex, 
+			int reportThemeIndex, int showTypeIndex){
+		SearchController.newspaperTypeIndex = newspaperTypeIndex;
+		SearchController.newsTypeIndex = newsTypeIndex;
+		SearchController.reportThemeIndex = reportThemeIndex;
+		SearchController.showTypeIndex = showTypeIndex;
+	}
+
+	public static void searchByTag(int newspaperTypeIndex, int newsTypeIndex,
+			int reportThemeIndex, int showTypeIndex) {
 		searchNewsList.clear();
 		String newspaperType = Lab.newspaperType[newspaperTypeIndex];
-		String newsType = Lab.newspaperType[newsTypeIndex];
-		String reportTheme = Lab.newspaperType[reportThemeIndex];
-		for(NewsData newsData: NewsDataList.newsDataList){
-			Map<String, String> temp = newsData.getTagItsMap();
-			if(temp.get("newspaperType") == newspaperType &&
-				temp.get("newsType") == newsType &&
-				 temp.get("reportTheme") == reportTheme){
-				searchNewsList.add(newsData);
+		String newsType = Lab.newsType[newsTypeIndex];
+		String reportTheme = Lab.reportTheme[reportThemeIndex];
+		String showType = Lab.showType[showTypeIndex];
+		for (NewsData newsData : NewsDataList.newsDataList) {
+			if (!newsData.getIsDeleted()) {
+
+				Map<String, String> temp = newsData.getTagItsMap();
+				Logger logger = Logger.getLogger("zhenxiongwu");
+				logger.info(temp.get(Lab.NEWSPAPERTYPE));
+				logger.info(newspaperType);
+				
+				if(temp.get(Lab.NEWSTYPE) == null){
+					temp.put(Lab.NEWSTYPE,"");
+				}
+				if(temp.get(Lab.NEWSPAPERTYPE)==null){
+					temp.put(Lab.NEWSPAPERTYPE,"");
+				}
+				if(temp.get(Lab.REPORTTHEME)==null){
+					temp.put(Lab.REPORTTHEME,"");
+				}
+				if(temp.get(Lab.SHOWTYPE)==null){
+					temp.put(Lab.SHOWTYPE,"");
+				}
+				if (temp.get(Lab.NEWSPAPERTYPE).equals(newspaperType) &&
+						temp.get(Lab.NEWSTYPE).equals(newsType) && 
+						temp.get(Lab.REPORTTHEME).equals(reportTheme) &&
+						temp.get(Lab.SHOWTYPE).equals(showType)) {
+					searchNewsList.add(newsData);
+				}
 			}
-		}		
+		}
 	}
-	
-	public static void refreshSearchNewsList(){
-		initSearchNewsList();
+
+	public static void refreshSearchNewsList() {
+		searchByTag(newspaperTypeIndex, newsTypeIndex, reportThemeIndex, showTypeIndex);
 		notifysAll();
 	}
 
