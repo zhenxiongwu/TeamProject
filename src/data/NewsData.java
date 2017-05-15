@@ -18,8 +18,17 @@ public class NewsData {
 	private String TrueUrl;
 	private String Tags;
 	private String EncodedContent;
+	private String Gender;
 	private Map<String, String> TagItsMap = new HashMap<String, String>();
 
+	public String getGender(){
+		return Gender;
+	}
+	
+	public void setGender(String gender){
+		Gender = gender;
+	}
+	
 	public void setTagItsMap(Map<String, String> tagItsMap) {
 		TagItsMap = tagItsMap;
 	}
