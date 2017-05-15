@@ -70,13 +70,13 @@ public class NewsDataList {
 	private static String judgeTag(NewsData newsData){
 		Map<String, String> temp = newsData.getTagItsMap();
 		String result = "";
-		if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[4])){
+		if(temp.get(Lab.REPORTTHEME)!=null){
 			result += "var4Type4";
 		}
-		else if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[5])){
+		else if(temp.get(Lab.REPORTTHEME)!=null){
 			result += "var4Type5";
 		}
-		else if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[7])){
+		else if(temp.get(Lab.REPORTTHEME)!=null){
 			result += "var4Type7";
 		}
 

@@ -18,7 +18,7 @@ public class NewsData {
 	private String TrueUrl;
 	private String Tags;
 	private String EncodedContent;
-	private String Gender;
+	private String Gender="";
 	private Map<String, String> TagItsMap = new HashMap<String, String>();
 
 	public String getGender(){

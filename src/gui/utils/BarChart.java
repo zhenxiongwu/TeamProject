@@ -11,10 +11,11 @@ import org.swtchart.Chart;
 import org.swtchart.IBarSeries;
 import org.swtchart.ISeries.SeriesType;
 
+
 import data.NewsDataList;
 
 //柱状图实例
-public class BarChartExample {
+public class BarChart {
 
     /**
      * The main method.
@@ -24,7 +25,7 @@ public class BarChartExample {
      */
     
     
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         Display display = new Display();
         Shell shell = new Shell(display);
         shell.setText("Bar Chart");
@@ -41,7 +42,7 @@ public class BarChartExample {
         }
         display.dispose();
     }
-
+*/
     /**
      * create the chart.
      * 
@@ -83,6 +84,7 @@ public class BarChartExample {
 
         return chart;
     }
+    
     public static double[] getYSeriesSex0(){
     	Map<Object, Object> data = NewsDataList.getStatisticsData();
     	double[] resultData = {(double) data.get("var4Type4Sex0"),
