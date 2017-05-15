@@ -49,7 +49,6 @@ public class Lab {
 		return 0;
 	}
 	
-	
 	public static String[] reportTheme = new String[]{
 			"",
 			"社会各界帮助关爱",
@@ -63,7 +62,7 @@ public class Lab {
 			"打工父母在城市艰难的生活",
 			"其他"
 	};
-	
+
 	public static int getIndexOfReportTheme(String lab){
 		if(lab == null)
 			return 0;

@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 import constant.Lab;
+import gui.utils.BarChart;
 
 
 public class StatisticsPageHolder extends PageHolder{
@@ -39,7 +40,7 @@ public class StatisticsPageHolder extends PageHolder{
 		this.parent = parent;
 		page = new Composite(parent, SWT.NONE);
 		page.setLayout(new FillLayout());
-
+		BarChart.createChart(page);
 		tabFolder = new TabFolder(page, SWT.NONE);
 
 		{
