@@ -17,6 +17,10 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
+import com.sun.glass.ui.delegate.MenuDelegate;
+import com.sun.glass.ui.delegate.MenuItemDelegate;
+import com.sun.swing.internal.plaf.metal.resources.metal;
+
 import constant.Lab;
 import controller.DeleteController;
 import controller.SearchController;
@@ -112,7 +116,7 @@ implements NewsListListener,SearchController.DataChangeListener{
 	@Override
 	public void refresh() {
 		newsListBuilder.refresh();
-//		page.layout();
+		page.layout();
 	}
 
 	@Override
@@ -133,47 +137,77 @@ implements NewsListListener,SearchController.DataChangeListener{
 	}
 
 	
+	private MenuItem menuItemDelete;
+	private MenuItem menuItemDownload;
+	
+	
+	class MyDownloadListener implements Listener{
+		
+		NewsData object; 
+		
+		public void resetNewsData(NewsData newsData){
+			object = newsData;
+		}
+		
+		@Override
+		public void handleEvent(Event arg0) {
+//			TODO download
+			
+		}
+	};
+	
+	class MyDeleteListener implements Listener{
+
+		NewsData object; 
+		
+		public void resetNewsData(NewsData newsData){
+			object = newsData;
+		}
+		
+		@Override
+		public void handleEvent(Event arg0) {
+			DeleteController.addRecycleNews(object);
+			
+		}
+		
+	}
+	
+	MyDownloadListener downloadListener = new MyDownloadListener();
+	MyDeleteListener deleteListener = new MyDeleteListener();
+	
+	
+	
 	@Override
-	public void onItemClickDown(int mouse_button, Control control, NewsData object, int position) {
+	public void onItemClickDown(int mouse_button, Control control,Menu menu, NewsData object, int position) {
 		// TODO 自动生成的方法存根
 		
 	}
 
 	@Override
-	public void onItemClickUp(int mouse_button, Control control, NewsData object, int position) {
+	public void onItemClickUp(int mouse_button, Control control,Menu menu, NewsData object, int position) {
 
 		Logger logger = Logger.getLogger("zhenxiongwu");
 		
-		if(mouse_button == 3){
-			Menu menu = new Menu(control);
-			MenuItem menuItemDownload = new MenuItem(menu,SWT.POP_UP);
+		
+		if(menu.getItemCount()==0){
+			menuItemDownload = new MenuItem(menu, SWT.POP_UP);
 			menuItemDownload.setText("下载(Download)　　");
-			menuItemDownload.addListener(SWT.Selection,new Listener() {
-				
-				@Override
-				public void handleEvent(Event arg0) {
-					// TODO 自动生成的方法存根
-					menu.dispose();
-				}
-			});
-			MenuItem menuItemDelete = new MenuItem(menu,SWT.POP_UP);
+			menuItemDownload.addListener(SWT.Selection, downloadListener);
+
+			menuItemDelete = new MenuItem(menu, SWT.POP_UP);
 			menuItemDelete.setText("删除(Delete)");
-			menuItemDelete.addListener(SWT.Selection,new Listener() {
-				
-				@Override
-				public void handleEvent(Event arg0) {
-					
-					DeleteController.addRecycleNews(object);
-					logger.info(object.getTitle());
-					menu.dispose();
-				}
-			});
-			control.setMenu(menu);
+			menuItemDelete.addListener(SWT.Selection, deleteListener);
+		}
+
+		if(mouse_button == 3){
+			
+			downloadListener.resetNewsData(object);
+			deleteListener.resetNewsData(object);
 		}
 	}
 
 	@Override
-	public void onItemDoubleClick(int mouse_button, Control control, NewsData object, int position) {
+	public void onItemDoubleClick(int mouse_button, Control control,Menu menu, NewsData object, int position) {
 		if(onClickNewsListener != null && mouse_button == 1){
 			onClickNewsListener.onClickNews(control,object,position);
 		}

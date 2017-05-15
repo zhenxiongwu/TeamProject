@@ -28,8 +28,6 @@ public class DeleteController {
 
 	public static void addRecycleNews(NewsData news) {
 		news.setIsDeleted("true");
-		Logger logger = Logger.getLogger("zhenxiongwu");
-		logger.info(news.getTitle());
 		recycleNewsList.add(news);
 
 		dataChange();
@@ -38,6 +36,9 @@ public class DeleteController {
 	public static void recoverRecycleNews(NewsData news) {
 		news.setIsDeleted("false");
 		recycleNewsList.remove(news);
+		Logger logger = Logger.getLogger("zhenxiongwu");
+		logger.info("recycleNewList remove "+news.getTitle());
+		logger.info("recycleNewsList size is "+recycleNewsList.size());
 		dataChange();
 	}
 

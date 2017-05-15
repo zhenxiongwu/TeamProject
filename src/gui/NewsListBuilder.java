@@ -20,6 +20,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Text;
 
 
@@ -28,11 +30,11 @@ import data.NewsData;
 public class NewsListBuilder {
 
 	public interface NewsListListener {
-		public void onItemClickDown(int mouse_button, Control control, NewsData object, int position);
+		public void onItemClickDown(int mouse_button, Control control, Menu menu, NewsData object, int position);
 
-		public void onItemClickUp(int mouse_button, Control control, NewsData object, int position);
+		public void onItemClickUp(int mouse_button, Control control,Menu menu, NewsData object, int position);
 
-		public void onItemDoubleClick(int mouse_button, Control control, NewsData object, int position);
+		public void onItemDoubleClick(int mouse_button, Control control,Menu menu, NewsData object, int position);
 	}
 
 	private NewsListListener newsListListener = null;
@@ -70,7 +72,7 @@ public class NewsListBuilder {
 			currunt_page_num = 1;
 			total_page_num = 1;
 		}
-		createNewsList(parent, objects);
+		createNewsList(parent);
 	}
 
 	public void setNewsListListener(NewsListListener newsListListener) {
@@ -81,7 +83,7 @@ public class NewsListBuilder {
 		return externalComposite;
 	}
 
-	private void createNewsList(Composite parent, List<NewsData> objects) {
+	private void createNewsList(Composite parent) {
 		externalComposite = new Composite(parent, SWT.NONE);
 		externalComposite.setLayout(new GridLayout(10, true));
 
@@ -103,7 +105,6 @@ public class NewsListBuilder {
 					currunt_page_num--;
 					refresh();
 				}
-				
 			});
 		}
 
@@ -121,7 +122,6 @@ public class NewsListBuilder {
 			text_currunt_page.setText(String.format("%d", currunt_page_num));
 			GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 			text_currunt_page.setLayoutData(gridData);
-			// gridData.horizontalAlignment=GridData.HORIZONTAL_ALIGN_CENTER;
 		}
 
 		{
@@ -192,6 +192,7 @@ public class NewsListBuilder {
 			scrolledComposite.setExpandHorizontal(true);
 			scrolledComposite.setExpandVertical(true);
 			scrolledComposite.setAlwaysShowScrollBars(true);
+
 		}
 
 	}
@@ -219,6 +220,10 @@ public class NewsListBuilder {
 		group.setLayout(new FillLayout());
 
 		Label label_title = new Label(group, SWT.NONE);
+		Menu menu = new Menu(label_title);
+//		MenuItem menuItem = new MenuItem(menu,SWT.NONE);
+		label_title.setMenu(menu);
+//		label_title.setMenu(new Menu(label_title));
 
 		// text_title.setEnabled(false);
 
@@ -229,8 +234,11 @@ public class NewsListBuilder {
 				if (newsListListener != null){
 					Logger logger = Logger.getLogger("zhenxiongwu");
 					NewsData newsData = getNewsData(position);
-					newsListListener.onItemClickUp(arg0.button, label_title, newsData, position);
-				
+//					Menu menu = new Menu(label_title);
+					logger.info("set menu");
+					newsListListener.onItemClickUp(arg0.button, label_title, menu, newsData, position);
+					label_title.setMenu(menu);
+//					newsListListener.onItemClickUp(arg0.button,label_title,newsData,position);
 					group.layout();
 					logger.info(newsData.getTitle());
 				}
@@ -238,10 +246,12 @@ public class NewsListBuilder {
 
 			@Override
 			public void mouseDown(MouseEvent arg0) {
+
+				innerScrolledComposite.setFocus();
 				
 				if (newsListListener != null){
 					NewsData newsData = getNewsData(position);
-					newsListListener.onItemClickDown(arg0.button, label_title, newsData, position);
+					newsListListener.onItemClickDown(arg0.button, label_title, menu, newsData, position);
 					group.layout();
 				}
 					
@@ -250,7 +260,7 @@ public class NewsListBuilder {
 			@Override
 			public void mouseDoubleClick(MouseEvent arg0) {
 				if (newsListListener != null)
-					newsListListener.onItemDoubleClick(arg0.button, label_title, getNewsData(position), position);
+					newsListListener.onItemDoubleClick(arg0.button, label_title, menu, getNewsData(position), position);
 			}
 
 		});
@@ -284,7 +294,8 @@ public class NewsListBuilder {
 	
 	private void refreshCurrentPageObjects(){
 		current_page_objects.clear();
-		
+		Logger logger = Logger.getLogger("zhenxiongwu");
+		logger.info("objects size is "+objects.size());
 		if(currunt_page_num !=0){
 			for(int i =(currunt_page_num-1)*NEWS_PER_PAGE, j=0;i<objects.size()&& j<NEWS_PER_PAGE;i++,j++){
 
@@ -301,10 +312,14 @@ public class NewsListBuilder {
 
 	private void setData(){
 		int position = 0;
+		Logger logger = Logger.getLogger("zhenxiongwu");
+		logger.info("current objects size is "+current_page_objects.size());
 		
 		for(NewsData newsData : current_page_objects){
 			NewsItemHolder newsItemHolder = newsItemHolders.get(position);
 			newsItemHolder.gridData.exclude = false;
+			newsItemHolder.group.setVisible(true);
+			newsItemHolder.label.getMenu().setEnabled(true);
 			newsItemHolder.group.setText(newsData.getDate());
 			newsItemHolder.label.setText("\n\t"+newsData.getTitle()+"\n\n");
 			
@@ -314,6 +329,8 @@ public class NewsListBuilder {
 		for(;position<NEWS_PER_PAGE;position++){
 			NewsItemHolder newsItemHolder = newsItemHolders.get(position);
 			newsItemHolder.gridData.exclude = true;
+			newsItemHolder.group.setVisible(false);
+			newsItemHolder.label.getMenu().setEnabled(false);
 		}
 		innerScrolledComposite.layout();
 		scrolledComposite.setMinSize(innerScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
@@ -335,6 +352,8 @@ public class NewsListBuilder {
 			button_next_page.setEnabled(false);
 		} else
 			button_next_page.setEnabled(true);
+		
+		innerScrolledComposite.setFocus();
 
 		text_currunt_page.setText(String.valueOf(currunt_page_num));
 	}
