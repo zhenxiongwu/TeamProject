@@ -7,11 +7,11 @@ import org.eclipse.swt.widgets.Control;
 
 import controller.SearchController;
 import data.NewsData;
-import gui.NewsContentPageHolder.OnBackButtonListener;
+import gui.NewsContentPageHolder.OnNewsContentButtonListener;
 import gui.NewsSearchPageHolder.OnClickNewsListener;
 
 public class MainPageHolder extends PageHolder
-implements OnClickNewsListener,OnBackButtonListener {
+implements OnClickNewsListener,OnNewsContentButtonListener {
 
 	private StackLayout stacklayout = new StackLayout();
 
@@ -33,7 +33,7 @@ implements OnClickNewsListener,OnBackButtonListener {
 		newsSearchPage = newsSearchPageHolder.getPage(page);
 
 		newsContentPageHolder = new NewsContentPageHolder();
-		newsContentPageHolder.setOnBackButtonListener(this);
+		newsContentPageHolder.setOnNewsContentButtonListener(this);
 		newsContentPage = newsContentPageHolder.getPage(page);
 
 		stacklayout.topControl = newsSearchPage;
@@ -55,15 +55,49 @@ implements OnClickNewsListener,OnBackButtonListener {
 	@Override
 	public void onClickNews(Control control, NewsData object, int position) {
 		stacklayout.topControl = newsContentPage;
-		newsContentPageHolder.display(object);
+		boolean hasprev = true;
+		boolean hasnext = true;
+		if(SearchController.getSearchNewsList().indexOf(object)==0){
+			hasprev = false;
+		}
+		if(SearchController.getSearchNewsList().indexOf(object)==
+				SearchController.getSearchNewsList().size()-1)
+			hasnext = false;
+		newsContentPageHolder.display(object,hasprev,hasnext);
 		page.layout();
 	}
 
 	@Override
-	public void onBackButtonClick() {
+	public void onBackButtonClick(NewsData object) {
 		stacklayout.topControl = newsSearchPage;
 		page.layout();
 
+	}
+
+	@Override
+	public void onPrevNewsButtonClick(NewsData object) {
+		int index = SearchController.getSearchNewsList().indexOf(object);
+		boolean hasprev = true;
+		boolean hasnext = true;
+		if(index==1)
+			hasprev = false;
+		newsContentPageHolder.display(
+				SearchController.getSearchNewsList().get(index-1),hasprev,hasnext);
+		page.layout();
+		
+	}
+
+	@Override
+	public void onNextNewsButtonClick(NewsData object) {
+		int index = SearchController.getSearchNewsList().indexOf(object);
+		boolean hasprev = true;
+		boolean hasnext = true;
+		if(index==SearchController.getSearchNewsList().size()-2)
+			hasnext = false;
+		newsContentPageHolder.display(
+				SearchController.getSearchNewsList().get(index+1),hasprev,hasnext);
+		page.layout();
+		
 	}
 
 }

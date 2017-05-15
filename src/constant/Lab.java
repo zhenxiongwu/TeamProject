@@ -5,6 +5,8 @@ public class Lab {
 	public static String NEWSPAPERTYPE = "1";
 	public static String NEWSTYPE = "2";
 	public static String REPORTTHEME = "3";
+	public static String SHOWTYPE = "4";
+	public static String SEX = "5";
 	
 	public static String[] newspaperType = new String[]{
 			"",
@@ -132,10 +134,10 @@ public class Lab {
 			"女"
 	};
 	
-	public int getIndexOfSex(String lab){
+	public static int getIndexOfSex(String lab){
 		if(lab == null)
 			return 0;
-		if(lab.equals("男"))
+		else if(lab.equals("男"))
 			return 1;
 		else if(lab.equals("女"))
 			return 2;

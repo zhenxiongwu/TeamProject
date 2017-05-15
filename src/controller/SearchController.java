@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import abbot.swt.finder.matchers.test.StringDataMatcherTest;
 import constant.Lab;
 import data.NewsData;
 import data.NewsDataList;

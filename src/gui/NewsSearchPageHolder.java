@@ -29,7 +29,7 @@ import gui.NewsListBuilder.NewsListListener;
 
 public class NewsSearchPageHolder extends PageHolder implements NewsListListener, SearchController.DataChangeListener {
 
-	private final int COLUMN = 7;
+	private final int COLUMN = 9;
 
 	private Label paperStype_label;
 	private Combo paperStype_combo;
@@ -39,6 +39,14 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 	private Label reportStype_label;
 	private Combo reportStype_combo;
+	
+
+	private Label showType_label;
+	private Combo showType_combo;
+	
+
+	private Label sex_label;
+	private Combo sex_combo;
 
 	private Button search_button;
 
@@ -57,7 +65,7 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 			{
 				paperStype_label = new Label(page, SWT.NONE);
 				horizontal_align(paperStype_label, GridData.HORIZONTAL_ALIGN_CENTER);
-				paperStype_label.setText("报纸类型:");
+				paperStype_label.setText("\t报纸类型:");
 			}
 
 			{
@@ -71,7 +79,7 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 				newsStype_label = new Label(page, SWT.NONE);
 				// horizontal_align_fill(newsStype_label);
 				horizontal_align(newsStype_label, GridData.HORIZONTAL_ALIGN_CENTER);
-				newsStype_label.setText("新闻类型:");
+				newsStype_label.setText("\t新闻类型:");
 			}
 
 			{
@@ -84,16 +92,28 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 				reportStype_label = new Label(page, SWT.NONE);
 				// horizontal_align_fill(newsStype_label);
 				horizontal_align(reportStype_label, GridData.HORIZONTAL_ALIGN_CENTER);
-				reportStype_label.setText("报道主题:");
+				reportStype_label.setText("\t报道主题:");
+			}
+			
+
+			{
+//				gridData.horizontalSpan = COLUMN - 1;
+				reportStype_combo = new Combo(page, SWT.READ_ONLY);
+				reportStype_combo.setLayoutData(new GridData());
+//				horizontal_align(reportStype_combo, gridData);
+				reportStype_combo.setItems(Lab.reportTheme);
 			}
 
 			{
-				GridData gridData = new GridData();
-//				gridData.horizontalSpan = COLUMN - 1;
-				reportStype_combo = new Combo(page, SWT.READ_ONLY);
-				reportStype_combo.setLayoutData(gridData);
-//				horizontal_align(reportStype_combo, gridData);
-				reportStype_combo.setItems(Lab.reportTheme);
+				showType_label = new Label(page,SWT.NONE);
+				horizontal_align(showType_label,GridData.HORIZONTAL_ALIGN_CENTER);
+				showType_label.setText("\t形象呈现:");
+			}
+			
+			{
+				showType_combo = new Combo(page,SWT.READ_ONLY);
+				showType_combo.setLayoutData(new GridData());
+				showType_combo.setItems(Lab.showType);
 			}
 
 			{
