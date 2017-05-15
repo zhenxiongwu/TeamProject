@@ -242,7 +242,7 @@ public class NewsListBuilder {
 					group.layout();
 					logger.info(newsData.getTitle());
 				}
-			}
+			} 
 
 			@Override
 			public void mouseDown(MouseEvent arg0) {

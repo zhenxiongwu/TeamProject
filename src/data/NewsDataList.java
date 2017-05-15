@@ -28,4 +28,6 @@ public class NewsDataList {
 	public int getSize(){
 		return newsDataList.size();
 	}
+
+	//统计数据
 }

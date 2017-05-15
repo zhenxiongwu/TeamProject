@@ -21,7 +21,9 @@ public class BarChartExample {
      * @param args
      *            the arguments
      */
-    public static void main(String[] args) {
+    
+    
+   /* public static void main(String[] args) {
         Display display = new Display();
         Shell shell = new Shell(display);
         shell.setText("Bar Chart");
@@ -37,7 +39,7 @@ public class BarChartExample {
             }
         }
         display.dispose();
-    }
+    }*/
 
     /**
      * create the chart.
