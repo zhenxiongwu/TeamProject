@@ -3,6 +3,8 @@ package constant;
 public class Lab {
 	
 	public static String NEWSPAPERTYPE = "1";
+	public static String NEWSTYPE = "2";
+	public static String REPORTTHEME = "3";
 	
 	public static String[] newspaperType = new String[]{
 			"",
@@ -14,15 +16,12 @@ public class Lab {
 	public static int getIndexOfPaperType(String lab){
 		if(lab == null)
 			return 0;
-		if(lab.equals("中央一级党报")){
+		if(lab.equals("中央一级党报"))
 			return 1;
-		}
-		else if(lab.equals("省一级党报")){
+		else if(lab.equals("省一级党报"))
 			return 2;
-		}
-		else if(lab.equals("经营模式市场化的报纸")){
+		else if(lab.equals("经营模式市场化的报纸"))
 			return 3;
-		}
 		return 0;
 	}
 
@@ -34,6 +33,19 @@ public class Lab {
 			"其他"
 	};
 	
+	public static int getIndexOfNewsType(String lab){
+		if(lab == null)
+			return 0;
+		if(lab.equals("纯净新闻"))
+			return 1;
+		else if(lab.equals("特稿与特写"))
+			return 2;
+		else if(lab.equals("评论"))
+			return 3;
+		else if(lab.equals("其他"))
+			return 4;
+		return 0;
+	}
 	
 	public static String[] reportTheme = new String[]{
 			"",
@@ -48,9 +60,35 @@ public class Lab {
 			"打工父母在城市艰难的生活",
 			"其他"
 	};
+
+	public static int getIndexOfReportTheme(String lab){
+		if(lab == null)
+			return 0;
+		if(lab.equals("社会各界帮助关爱"))
+			return 1;
+		else if(lab.equals("社会各界对留守儿童现象提出的建议和看法"))
+			return 2;
+		else if(lab.equals("表彰帮助关爱留守儿童的单位和个人"))
+			return 3;
+		else if(lab.equals("留守儿童遭受暴力"))
+			return 4;
+		else if(lab.equals("留守儿童被性侵、猥亵、强奸或是怀孕、生子等"))
+			return 5;
+		else if(lab.equals("留守儿童犯罪"))
+			return 6;
+		else if(lab.equals("留守儿童意外死亡"))
+			return 7;
+		else if(lab.equals("留守儿童努力上进"))
+			return 8;
+		else if(lab.equals("打工父母在城市艰难的生活"))
+			return 9;
+		else if(lab.equals("其他"))
+			return 10;
+		return 0;
+	}
 	
 	
-	public static String[] newsSource = new String[]{
+/*	public static String[] newsSource = new String[]{
 			"",
 			"记者",
 			"政府",
@@ -60,7 +98,7 @@ public class Lab {
 			"专家学者",
 			"政府领导、政协或人大代表",
 			"其他"
-	};
+	};*/
 	
 	public static String[] showType = new String[]{
 			"",
@@ -70,6 +108,38 @@ public class Lab {
 			"问题儿童的形象",
 			"其他"
 	};
+	
+	public static int getIndexOfShowType(String lab){
+		if(lab == null)
+			return 0;
+		if(lab.equals("积极健康的形象"))
+			return 1;
+		else if(lab.equals("可怜悲惨的形象"))
+			return 2;
+		else if(lab.equals("沐恩幸福的形象"))
+			return 3;
+		else if(lab.equals("问题儿童的形象"))
+			return 4;
+		else if(lab.equals("其他"))
+			return 5;
+		return 0;
+	}
+	
+	public static String[] sex = new String[]{
+			"",
+			"男",
+			"女"
+	};
+	
+	public int getIndexOfSex(String lab){
+		if(lab == null)
+			return 0;
+		if(lab.equals("男"))
+			return 1;
+		else if(lab.equals("女"))
+			return 2;
+		return 0;
+	}
 	
 	public static String[] helpNewsType = new String[]{
 			"",
@@ -110,7 +180,6 @@ public class Lab {
 	public static String[] reportTheme_statistics = new String[]{
 			"留守儿童遭受暴力",
 			"留守儿童犯罪",
-			"留守儿童意外死亡",
-			"留守儿童积极向上"
+			"留守儿童意外死亡"
 	};
 }

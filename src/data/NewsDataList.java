@@ -39,7 +39,7 @@ public class NewsDataList {
 	//二、对变量4中第五类新闻加以分析，新闻中被家暴、被性侵等行为的留守儿童性别
 	//三、对变量4中第七类新闻加以分析，新闻中意外死亡的留守儿童性别
 	public Map getStatisticsData(){
-		Map resultMap = new HashMap<>();
+		Map<Object, Object> resultMap = new HashMap<>();
 		String var4Type4Sex0 ="var4Type4Sex0";
 		resultMap.put(var4Type4Sex0, 0);
 		
@@ -53,25 +53,41 @@ public class NewsDataList {
 		resultMap.put(var4Type7Sex1, 0);
 
 		for(NewsData newsData: NewsDataList.newsDataList){
-			Map<String, String> temp = newsData.getTagItsMap();
-			
-		}
-		
+			String goal = judgeTag(newsData);
+			if(goal == "")
+				continue;
+			int count = (int) resultMap.get(goal);
+			resultMap.put(goal, ++count);
+		}		
 		return resultMap;
-		
 	}
+	
 	private String judgeTag(NewsData newsData){
 		Map<String, String> temp = newsData.getTagItsMap();
-		String gender = newsData.getGender();
-		String result;
-		if(temp.get(Lab.)){
+		String result = "";
+		if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[4])){
 			result += "var4Type4";
 		}
-		else if(){
-			
+		else if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[5])){
+			result += "var4Type5";
 		}
+		else if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[7])){
+			result += "var4Type7";
+		}
+
+		
+		String gender = newsData.getGender();
+		if(gender.equals("")){
+			result = "";
+		}
+		else if(gender == Lab.sex[0]){
+			result += "Sex0";
+		}			
+		else{
+			result += "Sex1";
+		}
+		
+		return result;
 	}
-
-
 
 }

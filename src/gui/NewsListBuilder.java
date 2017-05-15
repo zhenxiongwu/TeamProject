@@ -65,13 +65,13 @@ public class NewsListBuilder {
 	public NewsListBuilder(Composite parent, List<NewsData> objects) {
 		this.parent = parent;
 		this.objects = objects;
-		total_page_num = objects.size() / NEWS_PER_PAGE;
+/*		total_page_num = objects.size() / NEWS_PER_PAGE;
 		if (objects.size() % NEWS_PER_PAGE != 0)
 			total_page_num++;
 		if (objects.size() == 0){
 			currunt_page_num = 1;
 			total_page_num = 1;
-		}
+		}*/
 		createNewsList(parent);
 	}
 
@@ -342,6 +342,16 @@ public class NewsListBuilder {
 
 		refreshCurrentPageObjects();
 		setData();
+		
+		total_page_num = objects.size() / NEWS_PER_PAGE;
+		if (objects.size() % NEWS_PER_PAGE != 0)
+			total_page_num++;
+		if (objects.size() == 0){
+			currunt_page_num = 1;
+			total_page_num = 1;
+		}
+
+		label_2.setText(String.format("页\t共%d页", total_page_num));
 
 		if (currunt_page_num == 1) {
 			button_prev_page.setEnabled(false);
