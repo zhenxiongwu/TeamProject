@@ -66,7 +66,7 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 			{
 				paperType_label = new Label(page, SWT.NONE);
 				horizontal_align(paperType_label, GridData.HORIZONTAL_ALIGN_CENTER);
-				paperType_label.setText("\t报纸类型:");
+				paperType_label.setText("报纸类型:");
 			}
 
 			{

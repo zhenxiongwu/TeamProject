@@ -138,6 +138,23 @@ public class NewsListBuilder {
 			gridData.horizontalAlignment = GridData.BEGINNING;
 			button_goto.setLayoutData(gridData);
 			button_goto.setText("跳转");
+			button_goto.addSelectionListener(new SelectionAdapter() {
+
+				@Override
+				public void widgetSelected(SelectionEvent arg0) {
+					String text_current_page = text_currunt_page.getText();
+					int current_p=-1;
+					try{current_p = Integer.parseInt(text_current_page);}
+					catch(Exception e){
+						
+					}
+					if(current_p!=-1 && current_p<=total_page_num){
+						currunt_page_num=current_p;
+						refresh();
+					}
+				}
+				
+			});
 		}
 
 		{

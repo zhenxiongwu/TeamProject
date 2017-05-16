@@ -73,6 +73,8 @@ public class NewsDataList {
 		Map<String, String> temp = newsData.getTagItsMap();
 		String result = "";
 		if(temp.get(Lab.REPORTTHEME)!=null){
+			Logger logger = Logger.getLogger("zhexiongwu");
+			logger.info("temp getLab is not null");
 			if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[4])){
 				result += "var4Type4";
 			}
