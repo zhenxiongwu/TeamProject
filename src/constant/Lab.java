@@ -2,11 +2,11 @@ package constant;
 
 public class Lab {
 	
-	public static String NEWSPAPERTYPE = "1";
-	public static String NEWSTYPE = "2";
-	public static String REPORTTHEME = "3";
-	public static String SHOWTYPE = "4";
-	public static String SEX = "5";
+	public static String NEWSPAPERTYPE = "NewsPaperType";
+	public static String NEWSTYPE = "NewsType";
+	public static String REPORTTHEME = "ReportTheme";
+	public static String SHOWTYPE = "ShowType";
+	public static String SEX = "Sex";
 	
 	public static String[] newspaperType = new String[]{
 			"",

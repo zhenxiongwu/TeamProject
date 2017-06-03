@@ -18,7 +18,7 @@ public class NewsDataList {
 		//newsDataParse.setNewsDataList(newsDataList, "nanfangdaily.xml");
 		//newsDataParse.setNewsDataList(newsDataList, "sichuan.xml");
 		DeleteController.initRecycleList();
-		
+		NewsDataPersistence.createXml(newsDataList, "myNews.xml");
 	}
 	
 	public static List<NewsData> getNewsDataList(){
@@ -72,8 +72,9 @@ public class NewsDataList {
 	private static String judgeTag(NewsData newsData){
 		Map<String, String> temp = newsData.getTagItsMap();
 		String result = "";
+		Logger logger = Logger.getLogger("daipeng");
+		logger.info(temp.get(Lab.REPORTTHEME));
 		if(temp.get(Lab.REPORTTHEME)!=null){
-			Logger logger = Logger.getLogger("zhexiongwu");
 			logger.info("temp getLab is not null");
 			if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[4])){
 				result += "var4Type4";
