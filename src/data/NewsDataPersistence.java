@@ -18,6 +18,8 @@ import constant.Lab;
 
 public class NewsDataPersistence{
 	
+	
+	//创建XML
 	static public void createXml(List<NewsData> newsDataList,String fileName) {
 		try{
 			DocumentBuilderFactory factory =  DocumentBuilderFactory.newInstance();  
