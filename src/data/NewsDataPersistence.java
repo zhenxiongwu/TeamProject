@@ -19,7 +19,7 @@ import constant.Lab;
 public class NewsDataPersistence{
 	
 	
-	//创建XML
+	//创建XML文件
 	static public void createXml(List<NewsData> newsDataList,String fileName) {
 		try{
 			DocumentBuilderFactory factory =  DocumentBuilderFactory.newInstance();  
