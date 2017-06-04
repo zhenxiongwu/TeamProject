@@ -18,7 +18,7 @@ public class NewsDataList {
 		//newsDataParse.setNewsDataList(newsDataList, "nanfangdaily.xml");
 		//newsDataParse.setNewsDataList(newsDataList, "sichuan.xml");
 		DeleteController.initRecycleList();
-		NewsDataPersistence.createXml(newsDataList, "myNews.xml");
+		NewsDataPersistence.createXml(newsDataList);
 	}
 	
 	public static List<NewsData> getNewsDataList(){

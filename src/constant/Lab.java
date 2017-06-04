@@ -2,12 +2,27 @@ package constant;
 
 public class Lab {
 	
+	//标签名称
 	public static String NEWSPAPERTYPE = "NewsPaperType";
 	public static String NEWSTYPE = "NewsType";
 	public static String REPORTTHEME = "ReportTheme";
 	public static String SHOWTYPE = "ShowType";
 	public static String SEX = "Sex";
-	
+ 
+	//XML的节点名称
+	public static String ISLOAD = "IsLoad";
+	public static String ISDELETED = "IsDeleted";
+	public static String TITLE = "Title";
+	public static String DATE = "Date";
+	public static String LOCATION = "Location";
+	public static String URL = "Url";
+	public static String TYPE = "Type";
+	public static String WORDCOUNT = "WordCount";
+	public static String ID= "ID";
+	public static String TRUEURL = "TrueUrl";
+	public static String TAGS = "Tags";
+	public static String ENCODEDCONTENT = "EncodedContent";
+
 	public static String[] newspaperType = new String[]{
 			"",
 			"中央一级党报",
