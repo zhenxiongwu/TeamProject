@@ -33,7 +33,7 @@ import gui.NewsListBuilder.NewsListListener;
 
 public class NewsSearchPageHolder extends PageHolder implements NewsListListener, SearchController.DataChangeListener {
 
-	private final int COLUMN = 9;
+	private final int COLUMN = 5;
 
 	private Label paperType_label;
 	private Combo paperType_combo;
@@ -65,12 +65,13 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 		{
 			{
 				paperType_label = new Label(page, SWT.NONE);
-				horizontal_align(paperType_label, GridData.HORIZONTAL_ALIGN_CENTER);
+//				horizontal_align(paperType_label, GridData.HORIZONTAL_ALIGN_CENTER);
 				paperType_label.setText("报纸类型:");
 			}
 
 			{
 				paperType_combo = new Combo(page, SWT.READ_ONLY);
+
 				horizontal_align(paperType_combo, GridData.HORIZONTAL_ALIGN_FILL);
 				paperType_combo.setItems(Lab.newspaperType);
 				paperType_combo.select(0);
@@ -78,8 +79,9 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 			{
 				newsType_label = new Label(page, SWT.NONE);
+
 				// horizontal_align_fill(newsStype_label);
-				horizontal_align(newsType_label, GridData.HORIZONTAL_ALIGN_CENTER);
+//				horizontal_align(newsType_label, GridData.HORIZONTAL_ALIGN_CENTER);
 				newsType_label.setText("\t新闻类型:");
 			}
 
@@ -88,39 +90,16 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 				horizontal_align(newsType_combo, GridData.HORIZONTAL_ALIGN_FILL);
 				newsType_combo.setItems(Lab.newsType);
 			}
-
-			{
-				reportType_label = new Label(page, SWT.NONE);
-				// horizontal_align_fill(newsStype_label);
-				horizontal_align(reportType_label, GridData.HORIZONTAL_ALIGN_CENTER);
-				reportType_label.setText("\t报道主题:");
-			}
 			
-
-			{
-//				gridData.horizontalSpan = COLUMN - 1;
-				reportType_combo = new Combo(page, SWT.READ_ONLY);
-				reportType_combo.setLayoutData(new GridData());
-//				horizontal_align(reportStype_combo, gridData);
-				reportType_combo.setItems(Lab.reportTheme);
-			}
-
-			{
-				showType_label = new Label(page,SWT.NONE);
-				horizontal_align(showType_label,GridData.HORIZONTAL_ALIGN_CENTER);
-				showType_label.setText("\t形象呈现:");
-			}
-			
-			{
-				showType_combo = new Combo(page,SWT.READ_ONLY);
-				showType_combo.setLayoutData(new GridData());
-				showType_combo.setItems(Lab.showType);
-			}
-
 			{
 				search_button = new Button(page, SWT.NONE);
 				search_button.setText("　搜　索　");
-				horizontal_align(search_button, GridData.HORIZONTAL_ALIGN_CENTER);
+				
+				GridData gridData = new GridData(GridData.VERTICAL_ALIGN_CENTER | GridData.HORIZONTAL_ALIGN_CENTER);
+				gridData.verticalSpan =2;
+//				gridData.horizontalSpan=COLUMN;
+//				horizontal_align(search_button, GridData.HORIZONTAL_ALIGN_FILL);
+				search_button.setLayoutData(gridData);
 				search_button.addSelectionListener(new SelectionAdapter() {
 
 					@Override
@@ -140,6 +119,36 @@ public class NewsSearchPageHolder extends PageHolder implements NewsListListener
 
 				});
 			}
+
+			{
+				reportType_label = new Label(page, SWT.NONE);
+				// horizontal_align_fill(newsStype_label);
+//				horizontal_align(reportType_label, GridData.HORIZONTAL_ALIGN_CENTER);
+				reportType_label.setText("报道主题:");
+			}
+			
+
+			{
+//				gridData.horizontalSpan = COLUMN - 1;
+				reportType_combo = new Combo(page, SWT.READ_ONLY);
+				reportType_combo.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
+//				horizontal_align(reportStype_combo, gridData);
+				reportType_combo.setItems(Lab.reportTheme);
+			}
+
+			{
+				showType_label = new Label(page,SWT.NONE);
+//				horizontal_align(showType_label,GridData.HORIZONTAL_ALIGN_CENTER);
+				showType_label.setText("\t形象呈现:");
+			}
+			
+			{
+				showType_combo = new Combo(page,SWT.READ_ONLY);
+				showType_combo.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
+				showType_combo.setItems(Lab.showType);
+			}
+
+			
 
 		}
 

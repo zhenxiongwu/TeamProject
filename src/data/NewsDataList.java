@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import com.sun.org.apache.bcel.internal.generic.RET;
+
 import constant.Lab;
 import controller.DeleteController;
 
@@ -40,29 +42,29 @@ public class NewsDataList {
 	public static Map<Object, Object> getStatisticsData(){
 		Map<Object, Object> resultMap = new HashMap<>();
 		String var4Type4Sex0 ="var4Type4Sex0";
-		resultMap.put(var4Type4Sex0, 5.0);
+		resultMap.put(var4Type4Sex0, 0.0);
 		
 		String var4Type4Sex1 = "var4Type4Sex1";
-		resultMap.put(var4Type4Sex1, 2.0);
+		resultMap.put(var4Type4Sex1, 0.0);
 		
 		String var4Type5Sex0 = "var4Type5Sex0";
-		resultMap.put(var4Type5Sex0, 3.0);
+		resultMap.put(var4Type5Sex0, 0.0);
 		
 		String var4Type5Sex1 = "var4Type5Sex1";
-		resultMap.put(var4Type5Sex1, 4.0);
+		resultMap.put(var4Type5Sex1, 0.0);
 		
 		String var4Type7Sex0 = "var4Type7Sex0";
-		resultMap.put(var4Type7Sex0, 8.0);
+		resultMap.put(var4Type7Sex0, 0.0);
 		
 		String var4Type7Sex1 = "var4Type7Sex1";
-		resultMap.put(var4Type7Sex1, 9.0);
+		resultMap.put(var4Type7Sex1, 0.0);
 
 		for(NewsData newsData: NewsDataList.newsDataList){
 			String goal = judgeTag(newsData);
 			
 			if(goal == "")
 				continue;
-			double count = (int) resultMap.get(goal);
+			double count = (double) resultMap.get(goal);
 			count += 1.0;
 			resultMap.put(goal, count);
 		}		
@@ -75,7 +77,10 @@ public class NewsDataList {
 		Logger logger = Logger.getLogger("daipeng");
 		logger.info(temp.get(Lab.REPORTTHEME));
 		if(temp.get(Lab.REPORTTHEME)!=null){
+<<<<<<< HEAD
 			logger.info("temp getLab is not null");
+=======
+>>>>>>> 6af4604c354937e0d6658a772c69ab7b006dca9c
 			if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[4])){
 				result += "var4Type4";
 			}
@@ -88,8 +93,8 @@ public class NewsDataList {
 			}
 		}
 		
-		String gender = newsData.getGender();
-		if(gender.equals("")){
+		String gender = temp.get(Lab.SEX);
+		if(gender==null||gender.equals("")){
 			result = "";
 		}
 		else if(gender == Lab.sex[1]){

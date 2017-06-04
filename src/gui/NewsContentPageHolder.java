@@ -15,8 +15,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.sun.javafx.scene.LayoutFlags;
-import com.sun.xml.internal.ws.dump.LoggingDumpTube.Position;
 
 import constant.Lab;
 import controller.TagController;
@@ -72,7 +70,7 @@ public class NewsContentPageHolder extends PageHolder {
 	@Override
 	protected void createContent(Composite parent) {
 		page = new Composite(parent, SWT.NONE);
-		GridLayout gridLayout = new GridLayout(GRIDLAYOUT_COLUMN, true);
+		GridLayout gridLayout = new GridLayout(GRIDLAYOUT_COLUMN, false);
 		page.setLayout(gridLayout);
 
 		{
@@ -103,8 +101,8 @@ public class NewsContentPageHolder extends PageHolder {
 
 		{
 			label_paperType = new Label(page, SWT.NONE);
-			label_paperType.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
-			label_paperType.setText("\t报纸类型：");
+//			label_paperType.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
+			label_paperType.setText("  报纸类型：");
 		}
 
 		{
@@ -115,7 +113,7 @@ public class NewsContentPageHolder extends PageHolder {
 
 		{
 			label_newsType = new Label(page, SWT.NONE);
-			label_newsType.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
+//			label_newsType.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
 			label_newsType.setText("\t新闻类型：");
 		}
 
@@ -141,14 +139,14 @@ public class NewsContentPageHolder extends PageHolder {
 		
 		{
 			label_reportTheme = new Label(page, SWT.NONE);
-			label_reportTheme.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
-			label_reportTheme.setText("\t报道主题：");
+//			label_reportTheme.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
+			label_reportTheme.setText("  报道主题：");
 		}
 
 		{
 			combo_reportTheme = new Combo(page, SWT.READ_ONLY);
 
-			GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+			GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
 			gridData.horizontalSpan = 3;
 			combo_reportTheme.setLayoutData(gridData);
 			combo_reportTheme.setItems(Lab.reportTheme);

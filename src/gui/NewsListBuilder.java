@@ -85,7 +85,7 @@ public class NewsListBuilder {
 
 	private void createNewsList(Composite parent) {
 		externalComposite = new Composite(parent, SWT.NONE);
-		externalComposite.setLayout(new GridLayout(10, true));
+		externalComposite.setLayout(new GridLayout(8, true));
 
 		{
 			createScrolledComposite();
@@ -94,7 +94,7 @@ public class NewsListBuilder {
 		{
 			button_prev_page = new Button(externalComposite, SWT.NONE);
 			GridData gridData = new GridData();
-			gridData.horizontalSpan = 3;
+			gridData.horizontalSpan = 2;
 			gridData.horizontalAlignment = GridData.END;
 			button_prev_page.setLayoutData(gridData);
 			button_prev_page.setText("　上一页　");
@@ -160,7 +160,7 @@ public class NewsListBuilder {
 		{
 			button_next_page = new Button(externalComposite, SWT.NONE);
 			GridData gridData = new GridData();
-			gridData.horizontalSpan = 3;
+			gridData.horizontalSpan = 2;
 			gridData.horizontalAlignment = GridData.BEGINNING;
 			button_next_page.setLayoutData(gridData);
 			button_next_page.setText("　下一页　");

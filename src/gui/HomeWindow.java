@@ -47,7 +47,6 @@ public class HomeWindow extends Window {
 	private Composite recyclePage;
 
 
-	static final int COLUMN = 7;
 
 	@Override
 	void createContents(Shell shell) {
