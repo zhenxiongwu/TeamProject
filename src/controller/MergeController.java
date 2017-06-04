@@ -35,7 +35,7 @@ public class MergeController {
 			}
 		}
 	}	
-
+ 
 	//做一致性测试的时候，假定贴的是相同的新闻
 	//判断是每一个标签都要有百分之九十的相似度
 	public static boolean Consistency(List<NewsData> l,List<NewsData> r){
@@ -72,4 +72,5 @@ public class MergeController {
 		}
 		return result;
 	}
+
 }

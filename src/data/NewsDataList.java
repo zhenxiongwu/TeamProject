@@ -20,7 +20,7 @@ public class NewsDataList {
 		//newsDataParse.setNewsDataList(newsDataList, "nanfangdaily.xml");
 		//newsDataParse.setNewsDataList(newsDataList, "sichuan.xml");
 		DeleteController.initRecycleList();
-		NewsDataPersistence.createXml(newsDataList);
+		NewsDataPersistence.createXml(newsDataList,5);
 	}
 	
 	public static List<NewsData> getNewsDataList(){
@@ -77,10 +77,6 @@ public class NewsDataList {
 		Logger logger = Logger.getLogger("daipeng");
 		logger.info(temp.get(Lab.REPORTTHEME));
 		if(temp.get(Lab.REPORTTHEME)!=null){
-<<<<<<< HEAD
-			logger.info("temp getLab is not null");
-=======
->>>>>>> 6af4604c354937e0d6658a772c69ab7b006dca9c
 			if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[4])){
 				result += "var4Type4";
 			}
