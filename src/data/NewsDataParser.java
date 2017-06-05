@@ -2,6 +2,7 @@ package data;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,7 +13,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.sun.java_cup.internal.runtime.virtual_parse_stack;
 
 import constant.Lab;
 import sun.misc.BASE64Decoder;
@@ -20,7 +20,7 @@ import sun.misc.BASE64Decoder;
 
 public class NewsDataParser {	
 	
-	public void setNewsDataList(List<NewsData> newsDataList,String path){
+	public static void setNewsDataList(List<NewsData> newsDataList,String path){
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -39,6 +39,7 @@ public class NewsDataParser {
                         else
                         	content = childNodes.item(k).getTextContent();
                         addAttr(node,k,content);
+                        
                     }
                 }
                 newsDataList.add(node);
@@ -80,35 +81,53 @@ public class NewsDataParser {
 	 }
 
 	static private void addAttr(NewsData temp,int k,String content){
+		/*Logger logger = Logger.getLogger("zhenxiongwu");
+		logger.info(content);*/
+		
+		//TODO 计数k可能有错
 		 switch(k){
-         	case 1:
-         		temp.setTagIts(content);
          	case 2:
-         		temp.setIsLoad(content);
+         		temp.setTagIts(content);
+         		break;
          	case 3:
+         		temp.setIsLoad(content);
+         		break;
+         	case 4:
          		temp.setIsDeleted(content);
+         		break;
          	case 7:
          		temp.setMemo(content);
+         		break;
          	case 9:
          		temp.setTitle(content);
+         		break;
          	case 11:
          		temp.setDate(content);
+         		break;
          	case 13:
          		temp.setLocation(content);
+         		break;
          	case 15:
          		temp.setUrl(content);
+         		break;
          	case 17:
          		temp.setType(content);
+         		break;
          	case 19:
          		temp.setWordCount(content);
+         		break;
          	case 21:
          		temp.setID(content);
+         		break;
          	case 23:
          		temp.setTrueUrl(content);
+         		break;
          	case 25:
          		temp.setTags(content);
+         		break;
          	case 27:
-         		temp.setEncodedContent(content);                      
+         		temp.setEncodedContent(content);  
+         		break;                    
          }   
 	 }
 
@@ -117,6 +136,8 @@ public class NewsDataParser {
 			temp.setIsLoad(content);
 		}
 		if(tagName.equals(Lab.ISDELETED)){
+			Logger logger = Logger.getLogger("zhenxiongwu");
+			logger.info("is Deleted");
 			temp.setIsDeleted(content);
 		}
 		if(tagName.equals(Lab.TITLE)){

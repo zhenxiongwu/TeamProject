@@ -15,12 +15,13 @@ public class NewsDataList {
 	public static List<NewsData> newsDataList = new ArrayList<NewsData>();
 	
 	public static void initNewsDataList(){
-		NewsDataParser newsDataParse = new NewsDataParser();
-		newsDataParse.setNewsDataList(newsDataList, "guangming.xml");
+		NewsDataParser.setNewsDataList(newsDataList, "guangming.xml");
 		//newsDataParse.setNewsDataList(newsDataList, "nanfangdaily.xml");
 		//newsDataParse.setNewsDataList(newsDataList, "sichuan.xml");
+		Logger logger = Logger.getLogger("zhenxiongwu");
+		logger.info(""+newsDataList.size());
 		DeleteController.initRecycleList();
-		NewsDataPersistence.createXml(newsDataList,5);
+		//NewsDataPersistence.createXml(newsDataList,5);
 	}
 	
 	public static List<NewsData> getNewsDataList(){
@@ -74,8 +75,6 @@ public class NewsDataList {
 	private static String judgeTag(NewsData newsData){
 		Map<String, String> temp = newsData.getTagItsMap();
 		String result = "";
-		Logger logger = Logger.getLogger("daipeng");
-		logger.info(temp.get(Lab.REPORTTHEME));
 		if(temp.get(Lab.REPORTTHEME)!=null){
 			if(temp.get(Lab.REPORTTHEME).equals(Lab.reportTheme[4])){
 				result += "var4Type4";

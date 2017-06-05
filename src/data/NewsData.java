@@ -2,6 +2,8 @@ package data;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
+
 
 public class NewsData {
 	private String TagIts;
@@ -58,8 +60,11 @@ public class NewsData {
 	}
 
 	public void setIsDeleted(String isDeleted) {
-		if (isDeleted != null && isDeleted.equals("true"))
+		Logger logger = Logger.getLogger("zhenxiongwu");
+		if (isDeleted != null && isDeleted.equals("true")){
 			this.IsDeleted = true;
+			logger.info("set deleted");
+		}
 		else
 			this.IsDeleted = false;
 	}

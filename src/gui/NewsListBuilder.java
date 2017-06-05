@@ -249,15 +249,12 @@ public class NewsListBuilder {
 			@Override
 			public void mouseUp(MouseEvent arg0) {
 				if (newsListListener != null){
-					Logger logger = Logger.getLogger("zhenxiongwu");
 					NewsData newsData = getNewsData(position);
-//					Menu menu = new Menu(label_title);
-					logger.info("set menu");
+
 					newsListListener.onItemClickUp(arg0.button, label_title, menu, newsData, position);
 					label_title.setMenu(menu);
 //					newsListListener.onItemClickUp(arg0.button,label_title,newsData,position);
 					group.layout();
-					logger.info(newsData.getTitle());
 				}
 			} 
 
@@ -311,8 +308,6 @@ public class NewsListBuilder {
 	
 	private void refreshCurrentPageObjects(){
 		current_page_objects.clear();
-		Logger logger = Logger.getLogger("zhenxiongwu");
-		logger.info("objects size is "+objects.size());
 		if(currunt_page_num !=0){
 			for(int i =(currunt_page_num-1)*NEWS_PER_PAGE, j=0;i<objects.size()&& j<NEWS_PER_PAGE;i++,j++){
 
@@ -329,8 +324,6 @@ public class NewsListBuilder {
 
 	private void setData(){
 		int position = 0;
-		Logger logger = Logger.getLogger("zhenxiongwu");
-		logger.info("current objects size is "+current_page_objects.size());
 		
 		for(NewsData newsData : current_page_objects){
 			NewsItemHolder newsItemHolder = newsItemHolders.get(position);
