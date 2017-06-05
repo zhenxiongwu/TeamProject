@@ -21,7 +21,7 @@ public class DeleteController {
 		dataChangeListeners.add(dataChangeListener);
 	}
 
-	private static void notifysAll() {
+	public static void notifysAll() {
 		for (DataChangeListener dataChangeListener : dataChangeListeners) {
 			dataChangeListener.recycleNewsChange();
 		}

@@ -21,13 +21,12 @@ import constant.Lab;
 
 public class NewsDataPersistence{
 	
-	
 	//创建XML文件
-	static public void createXml(List<NewsData> newsDataList,int key) {
+	static public void createXml(List<NewsData> newsDataList,String fileName) {
 		try{
 			
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");//设置日期格式
-			String fileName = df.format(new Date()) + ".xml";
+			/*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");//设置日期格式
+			String fileName = df.format(new Date()) + ".xml";*/
 			
 			
 			DocumentBuilderFactory factory =  DocumentBuilderFactory.newInstance();  
@@ -81,24 +80,24 @@ public class NewsDataPersistence{
 				
 				Element newspapertype = document.createElement(Lab.NEWSPAPERTYPE); 
 				String temp = news.getTagItsMap().get(Lab.NEWSPAPERTYPE);
-				newspapertype.setTextContent(Encrypt(temp, key));  
+				newspapertype.setTextContent(temp);  
 				
 				Element newstype = document.createElement(Lab.NEWSTYPE);  
 				temp =  news.getTagItsMap().get(Lab.NEWSTYPE);
-				newstype.setTextContent(Encrypt(temp, key));  
+				newstype.setTextContent(temp);  
 				
 				Element reporttheme = document.createElement(Lab.REPORTTHEME); 
-				temp = "报道主题";
-				//temp = news.getTagItsMap().get(Lab.REPORTTHEME);
-				reporttheme.setTextContent(Decrypt(Encrypt(temp, key),key));  
+				//temp = "报道主题";
+				temp = news.getTagItsMap().get(Lab.REPORTTHEME);
+				reporttheme.setTextContent(temp);  
 				
 				Element showtype = document.createElement(Lab.SHOWTYPE);  
 				temp = news.getTagItsMap().get(Lab.SHOWTYPE);
-				showtype.setTextContent(Encrypt(temp, key));  
+				showtype.setTextContent(temp);  
 				
 				Element sex = document.createElement(Lab.SEX);  
 				temp = news.getTagItsMap().get(Lab.SEX);
-				sex.setTextContent(Encrypt(temp,key));  
+				sex.setTextContent(temp);  
 
 				newsData.appendChild(isLoad);  
 				newsData.appendChild(isDeleted);  
@@ -141,40 +140,5 @@ public class NewsDataPersistence{
 		
 	}
 	
-	public static String Encrypt(String str,int k){
-		if(str == null)
-			return "";
-		byte[] b = null;
-		try {
-			b = str.getBytes("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for(int i = 0; i < k; i += 2){
-			byte m = b[i];
-		    b[i] = b[i + 1];
-		    b[i + 1] = m;
-		}
-		return b.toString();
-	}
-	
-	public static String Decrypt(String str,int k){
-		char arr[] = str.toCharArray();
-		for(int i = 0; i < k; i += 2){
-			StringBuilder strBuilder = new StringBuilder(str);
-			char temp = arr[i];
-			strBuilder.setCharAt(i,arr[i+1]);
-			strBuilder.setCharAt(i+1,temp);
-			str = strBuilder.toString();
-		}
-		String result = "";
-		try {
-			result = new String(str.getBytes(), "utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
-	}
+
 }

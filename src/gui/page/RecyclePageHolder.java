@@ -1,4 +1,4 @@
-package gui;
+package gui.page;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -18,7 +18,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import controller.DeleteController;
 import data.NewsData;
-import gui.NewsListBuilder.NewsListListener;
+import gui.page.NewsListBuilder.NewsListListener;
 import sun.rmi.runtime.Log;
 
 public class RecyclePageHolder extends PageHolder implements NewsListListener, DeleteController.DataChangeListener {

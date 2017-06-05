@@ -1,4 +1,4 @@
-package gui;
+package gui.page;
 
 import java.util.logging.Logger;
 
@@ -29,7 +29,7 @@ import controller.DeleteController;
 import controller.SearchController;
 import data.Download;
 import data.NewsData;
-import gui.NewsListBuilder.NewsListListener;
+import gui.page.NewsListBuilder.NewsListListener;
 
 public class NewsSearchPageHolder extends PageHolder implements NewsListListener, SearchController.DataChangeListener {
 

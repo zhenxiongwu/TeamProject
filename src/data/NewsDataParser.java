@@ -1,8 +1,8 @@
 package data;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -79,7 +79,7 @@ public class NewsDataParser {
 		    str = str.replace("<html>", "").replace("<ml>", "").replace("</html>","");
 		    return str;
 	 }
-
+	
 	static private void addAttr(NewsData temp,int k,String content){
 		/*Logger logger = Logger.getLogger("zhenxiongwu");
 		logger.info(content);*/
@@ -136,8 +136,6 @@ public class NewsDataParser {
 			temp.setIsLoad(content);
 		}
 		if(tagName.equals(Lab.ISDELETED)){
-			Logger logger = Logger.getLogger("zhenxiongwu");
-			logger.info("is Deleted");
 			temp.setIsDeleted(content);
 		}
 		if(tagName.equals(Lab.TITLE)){
@@ -190,8 +188,8 @@ public class NewsDataParser {
 	
 	//解析新生成的XML文件
 	@SuppressWarnings("null")
-	static public List<NewsData> getFromFile(String path){
-		List<NewsData> result = null;
+	static public List<NewsData> getFromFile(String path) throws SAXException{
+		List<NewsData> result = new ArrayList();
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -212,8 +210,6 @@ public class NewsDataParser {
                 result.add(node);
             }
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

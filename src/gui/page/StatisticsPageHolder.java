@@ -1,4 +1,4 @@
-package gui;
+package gui.page;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;

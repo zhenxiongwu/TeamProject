@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import com.sun.org.apache.bcel.internal.generic.RET;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 import constant.Lab;
 import controller.DeleteController;
@@ -63,7 +64,7 @@ public class NewsDataList {
 		for(NewsData newsData: NewsDataList.newsDataList){
 			String goal = judgeTag(newsData);
 			
-			if(goal == "")
+			if(goal.equals(""))
 				continue;
 			double count = (double) resultMap.get(goal);
 			count += 1.0;
@@ -92,10 +93,10 @@ public class NewsDataList {
 		if(gender==null||gender.equals("")){
 			result = "";
 		}
-		else if(gender == Lab.sex[1]){
+		else if(gender.equals(Lab.sex[1])){
 			result += "Sex0";
 		}			
-		else{
+		else {
 			result += "Sex1";
 		}
 		return result;

@@ -1,4 +1,4 @@
-package gui;
+package gui.page;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
@@ -7,8 +7,8 @@ import org.eclipse.swt.widgets.Control;
 
 import controller.SearchController;
 import data.NewsData;
-import gui.NewsContentPageHolder.OnNewsContentButtonListener;
-import gui.NewsSearchPageHolder.OnClickNewsListener;
+import gui.page.NewsContentPageHolder.OnNewsContentButtonListener;
+import gui.page.NewsSearchPageHolder.OnClickNewsListener;
 
 public class MainPageHolder extends PageHolder
 implements OnClickNewsListener,OnNewsContentButtonListener {

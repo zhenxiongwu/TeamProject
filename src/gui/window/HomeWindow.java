@@ -1,4 +1,4 @@
-package gui;
+package gui.window;
 
 
 import org.eclipse.swt.SWT;
@@ -14,9 +14,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 
-import com.sun.scenario.effect.Merge;
 
 import controller.DeleteController;
+import gui.page.ConsistentTestPageHolder;
+import gui.page.MainPageHolder;
+import gui.page.MergePageHolder;
+import gui.page.PageHolder;
+import gui.page.RecyclePageHolder;
+import gui.page.StatisticsPageHolder;
 import gui.utils.SWTUtils;
 
 
@@ -48,8 +53,6 @@ public class HomeWindow extends Window {
 	private RecyclePageHolder recyclePageHolder;
 	private Composite recyclePage;
 
-	private MergePageHolder mergePageHolder;
-	private Composite mergePage;
 	
 	private ConsistentTestPageHolder consistentTestPageHolder;
 	private Composite consistentTestPage;
@@ -86,7 +89,7 @@ public class HomeWindow extends Window {
 	private void createSashForm_function(Composite parentComp) {
 		sashForm_function = new SashForm(parentComp, SWT.NONE);
 		selectList = new List(sashForm_function, SWT.BORDER); // 分割窗左边的列表
-		selectList.setItems(new String[] { "查看（筛选）", "统计", "回收站" ,"合并","贴标签测试"});
+		selectList.setItems(new String[] { "查看（筛选）", "统计", "回收站" ,"多用户"});
 
 		Font font = new Font(display, "宋体", 12, SWT.NONE);
 		selectList.setFont(font);
@@ -109,9 +112,6 @@ public class HomeWindow extends Window {
 					stackLayout.topControl = recyclePage;
 					break;
 				case 3:
-					stackLayout.topControl = mergePage;
-					break;
-				case 4:
 					stackLayout.topControl = consistentTestPage;
 					break;
 				default:
@@ -141,10 +141,6 @@ public class HomeWindow extends Window {
 			recyclePage = recyclePageHolder.getPage(rightComposite);
 		}
 		
-		{
-			mergePageHolder = new MergePageHolder();
-			mergePage = mergePageHolder.getPage(rightComposite);
-		}
 		
 		{
 			consistentTestPageHolder = new ConsistentTestPageHolder();
