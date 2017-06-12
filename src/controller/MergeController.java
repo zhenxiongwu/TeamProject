@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.xml.sax.SAXException;
 
@@ -48,7 +49,7 @@ public class MergeController {
 
 	// 做一致性测试的时候，假定贴的是相同的新闻
 	// 判断是每一个标签都要有百分之九十的相似度
-	public static boolean Consistency(List<NewsData> l, List<NewsData> r) {
+	public static boolean Consistency(List<NewsData> l, List<NewsData> r, Map<String,Float> consistentResult) {
 		boolean result = true;
 		int diff_count_newspapertype = 0;
 		int diff_count_newstype = 0;
@@ -70,8 +71,13 @@ public class MergeController {
 				diff_count_showtype += 1;
 			}
 		}
-		if ((float) diff_count_newspapertype / l.size() >= 0.1 || (float) diff_count_newstype / l.size() >= 0.1
-				|| (float) diff_count_reporttheme / l.size() >= 0.1 || (float) diff_count_showtype / l.size() >= 0.1) {
+		consistentResult.put(Lab.NEWSPAPERTYPE,1.0f-(float) diff_count_newspapertype / l.size());
+		consistentResult.put(Lab.NEWSTYPE,1.0f-(float) diff_count_newstype / l.size());
+		consistentResult.put(Lab.REPORTTHEME,1.0f-(float) diff_count_reporttheme / l.size());
+		consistentResult.put(Lab.SHOWTYPE,1.0f-(float) diff_count_showtype / l.size());
+		
+		if ((float) diff_count_newspapertype / l.size() > 0.1 || (float) diff_count_newstype / l.size() > 0.1
+				|| (float) diff_count_reporttheme / l.size() > 0.1 || (float) diff_count_showtype / l.size() > 0.1) {
 			result = false;
 		}
 		return result;

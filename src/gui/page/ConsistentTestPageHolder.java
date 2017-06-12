@@ -2,7 +2,9 @@ package gui.page;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -22,6 +24,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Text;
 import org.xml.sax.SAXException;
 
+import constant.Lab;
 import controller.DeleteController;
 import controller.MergeController;
 import controller.SearchController;
@@ -139,9 +142,9 @@ public class ConsistentTestPageHolder extends PageHolder implements OnNewsConten
 
 							@Override
 							public void widgetSelected(SelectionEvent arg0) {
-								remote_test_file = saveFileDialog.open();
-								if (remote_test_file != null)
-									NewsDataPersistence.createXml(newsDatas, remote_test_file);
+								String export_file = saveFileDialog.open();
+								if (export_file != null)
+									NewsDataPersistence.createXml(newsDatas, export_file);
 							}
 
 						});
@@ -243,11 +246,30 @@ public class ConsistentTestPageHolder extends PageHolder implements OnNewsConten
 									try {
 										List<NewsData> remote = NewsDataParser.getFromFile(remote_test_file);
 										List<NewsData> local = NewsDataParser.getFromFile(local_test_file);
-										if (MergeController.Consistency(remote, local)) {
-											messageBox.setMessage("一致性通过!");
+										Map<String,Float> consistentResult = new HashMap();
+										String cResult;
+										String paperTypeIsPass="（通过）";
+										String newsTypeIsPass="（通过）";
+										String reportThemeIsPass="（通过）";
+										String showTypeIsPass="（通过）";
+										
+										if (MergeController.Consistency(remote, local,consistentResult)) {
+											cResult = "一致性检验通过!\n\n";
+//											messageBox.setMessage("一致性通过!");
 										} else {
-											messageBox.setMessage("一致性不通过!!!");
+											cResult = "一致性检验不通过!!!\n\n";
+//											messageBox.setMessage("一致性不通过!!!");
 										}
+										if(consistentResult.get(Lab.NEWSPAPERTYPE)<0.9f)paperTypeIsPass="（不通过）";
+										if(consistentResult.get(Lab.NEWSTYPE)<0.9f)newsTypeIsPass="（不通过）";
+										if(consistentResult.get(Lab.REPORTTHEME)<0.9f)reportThemeIsPass="（不通过）";
+										if(consistentResult.get(Lab.SHOWTYPE)<0.9f)showTypeIsPass="（不通过）";
+										cResult+="各标签一致性：\n"
+												+"\n\t报纸类型:\t"+consistentResult.get(Lab.NEWSPAPERTYPE)*100+"%"+paperTypeIsPass
+												+"\t\t\t\n\t新闻类型:\t"+consistentResult.get(Lab.NEWSTYPE)*100+"%"+newsTypeIsPass
+												+"\t\t\t\n\t报道主题:\t"+consistentResult.get(Lab.REPORTTHEME)*100+"%"+reportThemeIsPass
+												+"\t\t\t\n\t显示形式:\t"+consistentResult.get(Lab.SHOWTYPE)*100+"%"+showTypeIsPass+"\n";
+										messageBox.setMessage(cResult);
 									} catch (Exception e) {
 									}
 								}
